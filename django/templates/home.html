@@ -1,8 +1,14 @@
-<!-- home/templates/home/home.html -->
-{% extends 'home/base.html' %}
+<!-- home.html -->
+{% extends 'base.html' %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}b1010code{% endblock title %}
 
 {% block content %}
-    <h1 class="text-center">Home</h1>
-{% endblock content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Bem-vindo à Página Inicial!</h1>
+        <p class="lead">Este é um exemplo de conteúdo para a página inicial.</p>
+        <hr class="my-4">
+        <p>Clique no botão abaixo para continuar explorando.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Explorar</a>
+    </div>
+{% endblock %}
