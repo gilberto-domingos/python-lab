@@ -1,0 +1,117 @@
+@use "@angular/material" as mat;
+@import "@angular/material/theming";
+
+@include mat.core();
+
+$angular-warn: mat.define-palette(mat.$red-palette);
+
+$angular-default-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$indigo-palette, 700),
+      secondary: mat.define-palette(mat.$amber-palette),
+      accent: mat.define-palette(mat.$amber-palette),
+      warn: $angular-warn,
+    ),
+  )
+);
+/*
+$angular-light-theme-purple: mat.define-light-theme(
+    (
+      color: (
+        primary: mat.define-palette(mat.$deep-purple-palette, 500, 100, 900),
+        accent: mat.define-palette(mat.$blue-gray-palette, 700, 100, 400),
+        warn: $angular-warn,
+      ),
+    )
+);
+
+$angular-dark-theme-purple: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$purple-palette, 500, 100, 900),
+      accent: mat.define-palette(mat.$amber-palette, 400, 100, 900),
+      warn: $angular-warn,
+    ),
+  )
+);
+
+$angular-light-theme-teal: mat.define-light-theme(
+    (
+      color: (
+        primary: mat.define-palette(mat.$teal-palette, 500, 100, 900),
+        accent: mat.define-palette(mat.$blue-gray-palette, 700, 100, 400),
+        warn: $angular-warn,
+      ),
+    )
+);
+
+$angular-dark-theme-teal: mat.define-dark-theme(
+    (
+      color: (
+        primary: mat.define-palette(mat.$teal-palette, 500, 100, 900),
+        accent: mat.define-palette(mat.$amber-palette, 500, 100, 900),
+        warn: $angular-warn,
+      ),
+    )
+);
+      */
+@include mat.all-component-themes($angular-default-theme);
+
+/*
+.lightModePurple {
+  @include mat.all-component-colors($angular-light-theme-purple);
+}
+.darkModePurple {
+  @include mat.all-component-colors($angular-dark-theme-purple);
+}
+.lightModeTeal {
+  @include mat.all-component-colors($angular-light-theme-teal);
+}
+.darkModeTeal {
+  @include mat.all-component-colors($angular-dark-theme-teal);
+}
+*/
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+:root {
+  --primary: #4e54c8;   // #2717ec;
+  --secondary: #6200EE;
+  --accent: #fc6604;
+  --warn: rgba(255, 0, 0, 0.824);
+  --success: rgb(0, 176, 0);
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-button.mat-success,
+.mat-stroked-button.mat-success {
+    color: #155724;
+}
+.mat-button.mat-success:hover,
+.mat-stroked-button.mat-success:hover {
+  background-color: #f0fff3;
+}
+
+.mat-raised-button.mat-success,
+.mat-flat-button.mat-success,
+.mat-fab.mat-success,
+.mat-mini-fab.mat-success {
+  color: #f0fff3;
+  background-color: #155724;
+}
+
+.mat-icon-button.mat-success {
+  color:#155724;
+}
