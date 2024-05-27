@@ -21,10 +21,12 @@
 }
 
 .btn-stripe {
-  color: #fff;
-  background-color: #070711;
-  margin: 5px;
-  padding: 5px;
+    box-shadow: 1px 1px 1px #000000;
+    color: #fff;
+    background-color: #000000;
+    text-shadow: 1px 1px 1px #000000;
+    margin: 5px;
+    padding: 5px;
 }
 
 .btn-stripe:hover {
@@ -36,17 +38,42 @@
 #card-text {
     color: #fff;
     text-shadow: 1px 1px 1px #1b1b1b;
-    background-color: #a743ae;
     padding: 10px;
     text-align: justify
 }
 
-.bnn-stripe {
-    max-width: 100% !important;
-    margin: 0 auto !important;
+@keyframes colorChange {
+    0% {
+        color: #ffffff;
+        text-shadow: 1px 1px 1px #000000;
+        box-shadow: 1px 1px 1px #ffffff;
+    }
+    50% {
+        background-color: #b15cd5;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px #000000;
+        box-shadow: 1px 1px 1px #000000;
+    }
+    100% {
+        background-color: #000000;
+        box-shadow: 1px 1px 1px #ffffff;
+    }
 }
 
-/* home.css */
+.btn-stripe {
+    max-width: 100% !important;
+    margin: 5px !important;
+    padding: -30px;
+    animation: colorChange 12s infinite;
+    color: white;
+    border: none;
+}
+
+.toast-header {
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000000;
+    background-color: #3459e6;
+}
 
 .responsive-table {
     display: table;
