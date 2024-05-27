@@ -1,0 +1,81 @@
+/* home.css */
+.card.bg-secondary.mb-3 {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.container {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+/* home.css * d79cdb/ */
+
+.btn-whatsapp {
+    background-color: #25D366;
+    border-color: #25D366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1DA851;
+    border-color: #fff;
+    color: white;
+}
+
+.btn-stripe {
+  color: #fff;
+  background-color: #070711;
+  margin: 5px;
+  padding: 5px;
+}
+
+.btn-stripe:hover {
+    background-color: #2182cd;
+    border-color: #fff;
+    color: white;
+}
+
+#card-text {
+    color: #fff;
+    text-shadow: 1px 1px 1px #1b1b1b;
+    background-color: #a743ae;
+    padding: 10px;
+    text-align: justify
+}
+
+.bnn-stripe {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+/* home.css */
+
+.responsive-table {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.responsive-table .table-cell {
+    flex: 1;
+    min-width: 50%; /* At least 50% width on larger screens */
+    box-sizing: border-box;
+    padding: 10px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.responsive-table .table-cell:nth-child(odd) {
+    background-color: #99ccff; /* Cor da primeira coluna */
+}
+
+.responsive-table .table-cell:nth-child(even) {
+    background-color: #ff9999; /* Cor da segunda coluna */
+}
+
+@media (max-width: 768px) {
+    .responsive-table .table-cell {
+        min-width: 100%; /* Full width on smaller screens */
+    }
+}
