@@ -1,4 +1,3 @@
-<!-- home.html -->
 {% extends 'base.html' %}
 
 {% block title %}b1010code{% endblock title %}
@@ -8,11 +7,10 @@
 <head>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
-
 <div class="container">
     {% block content %}
         <div class="card bg-secondary mb-3">
-            <img src="{% static 'image/banner-home.svg' %}" alt="banner" id="banner">
+            <img src="{% static 'image/home-banner.svg' %}" alt="banner" id="banner">
             <div class="card-body">
                 <p class="card-text">
                     Serviços automatizados, Backups segurança de informações, projetos personalizados sob demanda. Escalonamento de computação em nuvem larga scala para Big Techs.
@@ -23,7 +21,6 @@
                 </a>
             </div>
         </div>
-
         <div class="card container mt-4">
             <div class="responsive-table">
                 <div class="table-cell bg-light border">
@@ -48,7 +45,6 @@
                 </div>
             </div>
         </div>
-
         <div class="card bg-secondary mb-3" style="max-width: 20rem;">
             <img src="{% static 'image/backups.png' %}" alt="backups" id="backups">
         </div>
