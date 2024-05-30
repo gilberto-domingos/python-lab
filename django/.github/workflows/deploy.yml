@@ -34,4 +34,4 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
           git commit -m "Deploy to GitHub Pages"
-          git push https://github-actions:${GH_PAT}@github.com/gilberto-domingos/Django-b1010code.git main
+          git push https://${{ secrets.GH_PAT }}@github.com/gilberto-domingos/Django-b1010code.git main
