@@ -1,4 +1,4 @@
-FROM python:3.13.0b1-slim
+FROM python:3.12.3
 
 WORKDIR /app
 
@@ -8,5 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app/
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN python manage.py collectstatic --no-input
 
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
