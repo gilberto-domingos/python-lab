@@ -26,6 +26,11 @@ jobs:
     - name: Build static files
       run: python manage.py collectstatic --noinput
 
+    - name: Start SSH Agent and add key
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
     - name: Deploy to GitHub Pages
       run: |
         git config --global user.name 'github-actions[bot]'
@@ -33,10 +38,3 @@ jobs:
         git add .
         git commit -m "Deploy to GitHub Pages"
         git push git@github.com:gilberto-domingos/Django-b1010code.git main
-      env:
-        SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-
-    - name: Start SSH Agent
-      uses: webfactory/ssh-agent@v0.5.4
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
