@@ -32,9 +32,7 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Deploy to GitHub Pages
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      run:
         git add .
         git commit -m "Deploy to GitHub Pages"
         git push git@github.com:gilberto-domingos/Django-b1010code.git main
