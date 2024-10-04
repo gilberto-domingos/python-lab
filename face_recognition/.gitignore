@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.venv
+env
+
+# Angular
+node_modules/
+dist/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.swp
+
+# PostgreSQL
+*.sql
+pgdata/
+pg_log/
+
