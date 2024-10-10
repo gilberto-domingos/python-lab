@@ -1,6 +1,5 @@
 .logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 20px 0; /* Margem opcional para espaçamento */
-    }
+    width: 5%;
+    height: auto;
+    border: 5px solid red;
+}
