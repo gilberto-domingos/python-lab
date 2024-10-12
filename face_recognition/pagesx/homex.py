@@ -1,17 +1,17 @@
 import streamlit as st
-from PIL import Image
 
 def show():
-    st.title("Página do homex")
-
-# Exibir logotipo centralizado
-with st.container():
-    # Usar a classe .logo para centralizar a imagem
     st.markdown('<div class="logo">', unsafe_allow_html=True)
-    path = 'img/logo.png'
-    imagex = Image.open(path)
+    with st.container():
+        col1, col2, col3 = st.columns(3)
 
-    # Exibir a imagem com Streamlit
-    st.image(imagex, width=200)
+        with col1:
+            st.image("./img/logo.png")
+
+        with col2:
+            st.image("./img/logo.png")
+
+        with col3:
+            st.image("./img/logo.png")
 
     st.markdown('</div>', unsafe_allow_html=True)
