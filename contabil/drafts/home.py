@@ -9,7 +9,7 @@ menu_options = {
 }
 
 # Carregar o CSS externo
-with open("css/style.css") as f:
+with open("../css/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # Criar um seletor no corpo principal da página
@@ -21,17 +21,17 @@ if selected_page == "Página Inicial":
     # Adicione o conteúdo da página inicial aqui
 elif selected_page == "Empresas":
     st.title("Empresas")
-    import pages.companies as companies  # Certifique-se de que companies.py está na pasta pages
+    import pagesx.companies as companies  # Certifique-se de que companies.py está na pasta pages
     companies.show()  # Chame a função show() da página companies.py
 elif selected_page == "Sistemas":
     st.title("Sistemas")
-    import pages.sys as sys  # Certifique-se de que sys.py está na pasta pages
+    import pagesx.sys as sys  # Certifique-se de que sys.py está na pasta pages
     sys.show()  # Chame a função show() da página sys.py
 
 # Exibir logotipo centralizado
 with st.container():
     st.markdown('<div class="logo">', unsafe_allow_html=True)
-    path = 'img/logo.png'
+    path = '../img/logo.png'
 
     try:
         imagex = Image.open(path)
