@@ -1,1 +1,1 @@
-# Projeto de gráficos e relatórios Contabil 
+# Projeto python de dashboard gráficos e relatórios Contabil
