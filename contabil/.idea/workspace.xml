@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f737bffe-ad2e-4bb9-b25b-1f0fb0a375f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pagesx/apla.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pagesx/report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/gen_file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/drafts/home.py" beforeDir="false" afterPath="$PROJECT_DIR$/drafts/home.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagesx/homex.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagesx/homex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pagesx/sys.py" beforeDir="false" afterPath="$PROJECT_DIR$/pagesx/sys.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +45,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.gen_file.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -114,7 +115,14 @@
       <workItem from="1728585073902" duration="1000" />
       <workItem from="1728585093432" duration="8268000" />
       <workItem from="1728689032631" duration="1921000" />
-      <workItem from="1728700824003" duration="991000" />
+      <workItem from="1728700824003" duration="1365000" />
+      <workItem from="1728756983941" duration="749000" />
+      <workItem from="1728915468954" duration="1909000" />
+      <workItem from="1729003400173" duration="5461000" />
+      <workItem from="1729011750412" duration="286000" />
+      <workItem from="1729012054478" duration="1836000" />
+      <workItem from="1729013925960" duration="561000" />
+      <workItem from="1729014502431" duration="3137000" />
     </task>
     <servers />
   </component>
@@ -122,6 +130,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/a_Contabil$main.coverage" NAME="main Coverage Results" MODIFIED="1728317121808" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/a_Contabil$main.coverage" NAME="main Coverage Results" MODIFIED="1729012150811" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/a_Contabil$gen_file.coverage" NAME="gen_file Coverage Results" MODIFIED="1729015869925" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
