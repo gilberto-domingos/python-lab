@@ -27,9 +27,9 @@ st.markdown(
 with st.sidebar:
     selected = option_menu("Mosimann",
                            ["Home", 'Sistema', 'Obrigações', 'Empresas', 'Lista de entregas', 'Gestão de Pessoas',
-                            'Solicitações', 'Método APLA', 'Relatórios'],
+                            'Solicitações', 'Método APLA', 'Dashboards','Relatórios'],
                            icons=['house', 'sliders', 'clipboard-check', 'building', 'list-check', 'people', 'chat',
-                                  'book', 'file-earmark-text'],
+                                  'book','bar-chart', 'file-earmark-text'],
                            menu_icon="cast",
                            default_index=0)
 
@@ -54,6 +54,9 @@ elif selected == "Solicitações":
 elif selected == "Método APLA":
     from pagesx import apla
     apla.show()
+elif selected == "Dashboards":
+    from pagesx import dashboards
+    dashboards.show()
 elif selected == "Relatórios":
     st.title("Relatórios")
     from pagesx import report
