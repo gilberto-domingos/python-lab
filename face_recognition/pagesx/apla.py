@@ -53,4 +53,3 @@ def show():
     # Exibir dados nas colunas de data para verificação
     st.write("Dados nas colunas de data:")
     st.write(df[data_columns].head())  # Mostra as primeiras linhas das colunas de data
-
