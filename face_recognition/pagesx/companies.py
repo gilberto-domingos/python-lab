@@ -1,6 +1,11 @@
-# pages/sys.py
+import pandas as pd
 import streamlit as st
 
+
 def show():
-    st.title("Página do Empresas")
-    st.write("Conteúdo da página do empresas.")
+    try:
+        st.title("Empresas")
+
+    except FileNotFoundError:
+        st.error("Arquivo 'situation.xlsx' não encontrado. Verifique o caminho e tente novamente.")
+        st.stop()
