@@ -1,4 +1,4 @@
-,Invoice ID,Branch,City,Customer type,Gender,Product line,Unit price,Quantity,Tax 5%,Total,Date,Time,Pagamento,cogs,gross margin percentage,gross income,Rating
+,Invoice ID,Filial,Cidade,Cliente Tipo,Gênero,Linha de produtos,Preço unitário,Quantidade,Imposto 5%,Total,Data,Hora,Pagamento,Custo,Bruto Margem percentual,Bruto income,Classificação
 0,750-67-8428,A,Brusque,Member,Female,Saúde e beleza,"74,69",7,"26,1415","548,9715",1/5/2019,13:08,Compras online,"522,83","4,761904762","26,1415","9,1"
 1,226-31-3081,C,Balneário,Normal,Female,Acessórios eletrônicos,"15,28",5,"3,82","80,22",3/8/2019,10:29,Dinheiro,"76,4","4,761904762","3,82","9,6"
 2,631-41-3108,A,Brusque,Normal,Male,Casa e estilo de vida,"46,33",7,"16,2155","340,5255",3/3/2019,13:23,Cartão de crédito,"324,31","4,761904762","16,2155","7,4"
