@@ -7,6 +7,57 @@ __pycache__/
 .venv
 env
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Cython debug symbols
+*.pyd
+*.so
+*.dll
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Visual Studio Code settings
+.vscode/
+
+# Environment variables
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Streamlit cache
+.streamlit/
+
+# PostgreSQL dumps or database credentials
+*.sql
+pg_data/
+*.dump
+
+# Logs
+*.log
+*.out
+
+# macOS specific files
+.DS_Store
+
+# System files
+Thumbs.db
+
+# PyCharm specific files
+.idea/
+
+# Temporary files
+*.swp
+*.swo
+*.bak
+*.tmp
+
+
 # Angular
 node_modules/
 dist/
