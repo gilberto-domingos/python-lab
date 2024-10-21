@@ -47,7 +47,7 @@ def show():
     # Receita total por cidade em porcentagem
     city_total = df_filtered.groupby("Cidade")[["Total"]].sum().reset_index()
 
-    # Calcular a porcentagem do faturamento total
+    # Calcular a porcentagem do faturamento total  aContabil/.venv/bin
     total_faturamento = city_total["Total"].sum()
 
     if total_faturamento > 0:  # Verifica se o total não é zero para evitar divisão por zero
