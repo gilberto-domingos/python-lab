@@ -6,12 +6,12 @@ def show():
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            st.image("./img/logo.png")
+            st.image("./img/ylogo.png")
 
         with col2:
-            st.image("./img/logo.png")
+            st.image("./img/ylogo.png")
 
         with col3:
-            st.image("./img/logo.png")
+            st.image("./img/ylogo.png")
 
     st.markdown('</div>', unsafe_allow_html=True)

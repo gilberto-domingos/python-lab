@@ -27,9 +27,9 @@ st.markdown(
 with st.sidebar:
     selected = option_menu("Mosimann",
                            ["Home", 'Sistema', 'Obrigações', 'Empresas', 'Lista de entregas', 'Gestão de Pessoas',
-                            'Solicitações', 'Método APLA', 'Dashboards','Relatórios'],
+                            'Solicitações', 'Método APLA', 'Dashboards','Relatórios', 'Imagens'],
                            icons=['house', 'sliders', 'clipboard-check', 'building', 'list-check', 'people', 'chat',
-                                  'book','bar-chart', 'file-earmark-text'],
+                                  'book','bar-chart', 'file-earmark-text', 'file-earmark-text'],
                            menu_icon="cast",
                            default_index=0)
 
@@ -61,3 +61,6 @@ elif selected == "Relatórios":
     st.title("Relatórios")
     from pagesx import report
     report.show()
+elif selected == "Imagens":
+    from pagesx import img
+    img.show()
