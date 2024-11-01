@@ -26,10 +26,10 @@ st.markdown(
 # Menu lateral
 with st.sidebar:
     selected = option_menu("Mosimann",
-                           ["Home", 'Sistema', 'Obrigações', 'Empresas', 'Lista de entregas', 'Gestão de Pessoas',
-                            'Solicitações', 'Método APLA', 'Dashboards','Relatórios', 'Imagens'],
-                           icons=['house', 'sliders', 'clipboard-check', 'building', 'list-check', 'people', 'chat',
-                                  'book','bar-chart', 'file-earmark-text', 'file-earmark-text'],
+                           ["Home", 'Cadastro', 'Sistema', 'Obrigações', 'Empresas', 'Lista de entregas', 'Gestão de Pessoas',
+                            'Solicitações', 'Método APLA', 'Dashboards','Relatórios','Imagens','CSV'],
+                           icons=['house', 'list-check', 'sliders', 'clipboard-check', 'building', 'list-check', 'people', 'chat',
+                                  'book','bar-chart','file-earmark-text','file-earmark-text','file-earmark-text'],
                            menu_icon="cast",
                            default_index=0)
 
@@ -37,6 +37,9 @@ with st.sidebar:
 if selected == "Home":
     from pagesx import homex
     homex.show()
+elif selected == "Cadastro":
+    from pagesx import crud
+    crud.show()    
 elif selected == "Sistema":
     from pagesx import sys
     sys.show()
@@ -64,3 +67,6 @@ elif selected == "Relatórios":
 elif selected == "Imagens":
     from pagesx import img
     img.show()
+elif selected == "CSV":
+    from pagesx import csv
+    csv.show()    

@@ -2,3 +2,49 @@
     width: 5%;
     height: auto;
 }
+
+/* Estilo para bordas das tabelas */
+.stTable {
+    border: 1px solid #808080; /* Cor cinza para o contorno */
+    border-collapse: collapse; /* Bordas colapsadas para uma aparência mais limpa */
+    
+}
+.stTable th, .stTable td {
+    border: 1px solid #808080; /* Cor cinza para as linhas internas */
+    padding: 8px; /* Espaçamento interno */
+    
+}
+
+/* Estilo para inputs */
+input[type="text"], input[type="email"], textarea {
+    border: 1px solid #808080; /* Borda cinza padrão */
+    border-radius: 4px; /* Arredondar bordas */
+    padding: 8px; /* Espaço interno */
+}
+
+/* Borda mais escura ao focar */
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+    border-color: #505050; /* Cinza escuro para foco */
+    outline: none; /* Remove o contorno padrão azul */
+}
+
+
+/* Aplica um fundo ao st.selectbox */
+div[data-baseweb="select"] select {
+    background-color: #f0f0f0; /* Cor de fundo desejada */
+    border: 1px solid #ccc; /* Cor do contorno */
+    border-radius: 4px; /* Arredondar bordas */
+    padding: 8px; /* Espaçamento interno */
+    color: #333; /* Cor do texto */
+    font-size: 14px; /* Tamanho da fonte */
+}
+
+/* Estilo ao focar no select */
+div[data-baseweb="select"] select:focus {
+    outline: none; /* Remove a linha de contorno padrão */
+    border-color: #666; /* Cor do contorno ao focar */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); /* Sombra ao focar */
+    background-color: #e0e0e0; /* Muda a cor de fundo ao focar */
+}
+
+
