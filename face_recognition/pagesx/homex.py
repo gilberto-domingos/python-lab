@@ -1,17 +1,20 @@
 import streamlit as st
 
 def show():
-    st.markdown('<div class="logo">', unsafe_allow_html=True)
-    with st.container():
-        col1, col2, col3 = st.columns(3)
+    # Título
+    st.title("Conferenciador de Balanços")
 
-        with col1:
-            st.image("./img/ylogo.png")
+    # Começo do bloco HTML para estilização personalizada
+    st.markdown("<div class='columns-wrapper'>", unsafe_allow_html=True)
 
-        with col2:
-            st.image("./img/ylogo.png")
+    # Criação das três colunas
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.write("Coluna 1")
+    with col2:
+        st.write("Coluna 2")
+    with col3:
+        st.write("Coluna 3")
 
-        with col3:
-            st.image("./img/ylogo.png")
-
-    st.markdown('</div>', unsafe_allow_html=True)
+    # Fim do bloco HTML
+    st.markdown("</div>", unsafe_allow_html=True)
