@@ -8,11 +8,11 @@ def show():
     
     # select
     options = ["Adicionar", "Consultar", "Editar", "Deletar"]
-    choice = st.selectbox("Selecione a opção", options)
+    choice = st.selectbox("Escolha a opção : clique ", options)
 
     # Add Client
     if choice == "Adicionar":
-        st.subheader("Adicione um novo cliente:")
+        st.subheader("Adicione um novo cliente :")
         name = st.text_input("Nome")
         email = st.text_input("Email")
         phone = st.text_input("Telefone")
@@ -47,7 +47,7 @@ def show():
         st.subheader("Editar dados do cliente:")
         clients = fetch_all_clients()
         client_ids = [client["id"] for client in clients]
-        selected_client = st.selectbox("Selecione o cliente", client_ids)
+        selected_client = st.selectbox("Escolha o cliente : clique ", client_ids)
 
         if selected_client:
             client_data = next(client for client in clients if client["id"] == selected_client)

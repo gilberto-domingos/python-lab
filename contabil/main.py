@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+import pathlib
 
 # Configuração da página
 st.set_page_config(page_title="Mosimann", page_icon=":bar_chart:", layout="wide")
@@ -27,9 +28,9 @@ st.markdown(
 with st.sidebar:
     selected = option_menu("Mosimann",
                            ["Home", 'Cadastro', 'Sistema', 'Obrigações', 'Empresas', 'Lista de entregas', 'Gestão de Pessoas',
-                            'Solicitações', 'Método APLA', 'Dashboards','Relatórios','Imagens','CSV'],
+                            'Solicitações', 'Método APLA', 'Dashboards', 'Relatórios', 'Imagens', 'CSV'],
                            icons=['house', 'list-check', 'sliders', 'clipboard-check', 'building', 'list-check', 'people', 'chat',
-                                  'book','bar-chart','file-earmark-text','file-earmark-text','file-earmark-text'],
+                                  'book', 'bar-chart', 'file-earmark-text', 'file-earmark-text', 'file-earmark-text'],
                            menu_icon="cast",
                            default_index=0)
 
@@ -69,4 +70,4 @@ elif selected == "Imagens":
     img.show()
 elif selected == "CSV":
     from pagesx import csv
-    csv.show()    
+    csv.show()
