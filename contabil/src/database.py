@@ -6,7 +6,7 @@ from psycopg2.extras import RealDictCursor
 def get_connection():
     # Connect to PostgreSQL database
     conn = psycopg2.connect(
-        host="localhost",    # Use "localhost" if the PostgreSQL container is on your machine
+        host="mosiman-database",  # Nome do serviço Docker
         port="5432",
         database="contabil",
         user="mmss",
