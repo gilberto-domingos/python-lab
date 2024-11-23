@@ -80,7 +80,7 @@ footer {visibility: hidden;}
     display: flex;
     justify-content: center; /* Centraliza o container */
     gap: 10px; /* Espaçamento entre colunas */
-    background-color: rgb(0, 255, 13);
+    /*background-color: rgb(0, 255, 13);*/
     padding: 20px;
 }
 
