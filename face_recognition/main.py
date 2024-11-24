@@ -3,12 +3,15 @@ from streamlit_option_menu import option_menu
 import pathlib
 
 # Configuração da página
-st.set_page_config(page_title="Mosimann", page_icon=":bar_chart:", layout="wide")
+st.set_page_config(page_title="Mosimann",
+                   page_icon=":bar_chart:", layout="wide")
+
 
 # Função para carregar o arquivo CSS
 def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 
 # Carregar estilos CSS
 load_css("css/style.css")
@@ -21,18 +24,46 @@ st.markdown(
     footer {visibility: hidden;}
     </style>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
 # Menu lateral
 with st.sidebar:
-    selected = option_menu("Mosimann",
-                           ["Home", 'Cadastro', 'Sistema', 'Obrigações', 'Empresas', 'Lista de entregas', 'Gestão de Pessoas',
-                            'Solicitações', 'Método APLA', 'Dashboards', 'Relatórios', 'Imagens', 'CSV'],
-                           icons=['house', 'list-check', 'sliders', 'clipboard-check', 'building', 'list-check', 'people', 'chat',
-                                  'book', 'bar-chart', 'file-earmark-text', 'file-earmark-text', 'file-earmark-text'],
-                           menu_icon="cast",
-                           default_index=0)
+    selected = option_menu(
+        "Mosimann",
+        [
+            "Home",
+            "Cadastro",
+            "Sistema",
+            "Obrigações",
+            "Empresas",
+            "Lista de entregas",
+            "Gestão de Pessoas",
+            "Solicitações",
+            "Método APLA",
+            "Dashboards",
+            "Relatórios",
+            "Imagens",
+            "CSV",
+        ],
+        icons=[
+            "house",
+            "list-check",
+            "sliders",
+            "clipboard-check",
+            "building",
+            "list-check",
+            "people",
+            "chat",
+            "book",
+            "bar-chart",
+            "file-earmark-text",
+            "file-earmark-text",
+            "file-earmark-text",
+        ],
+        menu_icon="cast",
+        default_index=0,
+    )
 
 # Carregar e exibir as páginas com base na seleção do menu
 if selected == "Home":
@@ -40,14 +71,17 @@ if selected == "Home":
     homex.show()
 elif selected == "Cadastro":
     from pagesx import crud
-    crud.show()    
+
+    crud.show()
 elif selected == "Sistema":
     from pagesx import sys
+
     sys.show()
 elif selected == "Obrigações":
     st.title("Obrigações")
 elif selected == "Empresas":
     from pagesx import companies
+
     companies.show()
 elif selected == "Lista de entregas":
     st.title("Lista de Entregas")
@@ -57,17 +91,22 @@ elif selected == "Solicitações":
     st.title("Solicitações")
 elif selected == "Método APLA":
     from pagesx import apla
+
     apla.show()
 elif selected == "Dashboards":
     from pagesx import dashboards
+
     dashboards.show()
 elif selected == "Relatórios":
     st.title("Relatórios")
     from pagesx import report
+
     report.show()
 elif selected == "Imagens":
     from pagesx import img
+
     img.show()
 elif selected == "CSV":
     from pagesx import csv
+
     csv.show()
