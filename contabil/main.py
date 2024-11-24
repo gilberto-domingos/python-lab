@@ -32,6 +32,7 @@ with st.sidebar:
     selected = option_menu(
         "Mosimann",
         [
+            "Comp",
             "Home",
             "Cadastro",
             "Sistema",
@@ -47,6 +48,7 @@ with st.sidebar:
             "CSV",
         ],
         icons=[
+            "list-check",
             "house",
             "list-check",
             "sliders",
@@ -66,47 +68,56 @@ with st.sidebar:
     )
 
 # Carregar e exibir as páginas com base na seleção do menu
-if selected == "Home":
+
+if selected == "Comp":
+    from pagesx import comp
+    comp.show()
+
+elif selected == "Home":
     from pagesx import homex
     homex.show()
+
 elif selected == "Cadastro":
     from pagesx import crud
-
     crud.show()
+
 elif selected == "Sistema":
     from pagesx import sys
-
     sys.show()
+
 elif selected == "Obrigações":
     st.title("Obrigações")
+
 elif selected == "Empresas":
     from pagesx import companies
-
     companies.show()
+
 elif selected == "Lista de entregas":
     st.title("Lista de Entregas")
+
 elif selected == "Gestão de Pessoas":
     st.title("Gestão de Pessoas")
+
 elif selected == "Solicitações":
     st.title("Solicitações")
+
 elif selected == "Método APLA":
     from pagesx import apla
-
     apla.show()
+
 elif selected == "Dashboards":
     from pagesx import dashboards
-
     dashboards.show()
+
 elif selected == "Relatórios":
     st.title("Relatórios")
     from pagesx import report
-
     report.show()
+
 elif selected == "Imagens":
     from pagesx import img
-
     img.show()
+
 elif selected == "CSV":
     from pagesx import csv
-
     csv.show()
