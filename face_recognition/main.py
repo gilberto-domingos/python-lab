@@ -2,21 +2,17 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import pathlib
 
-# Configuração da página
 st.set_page_config(page_title="Mosimann",
                    page_icon=":bar_chart:", layout="wide")
 
 
-# Função para carregar o arquivo CSS
 def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
-# Carregar estilos CSS
 load_css("css/style.css")
 
-# Ocultar header e footer
 st.markdown(
     """
     <style>
@@ -27,7 +23,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Menu lateral
 with st.sidebar:
     selected = option_menu(
         "Mosimann",
@@ -64,10 +59,8 @@ with st.sidebar:
             "file-earmark-text",
         ],
         menu_icon="cast",
-        default_index=0,
+        default_index=1,
     )
-
-# Carregar e exibir as páginas com base na seleção do menu
 
 if selected == "Comp":
     from pagesx import comp
