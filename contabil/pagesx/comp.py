@@ -1,5 +1,6 @@
 import datetime
 import streamlit as st
+import pandas as pd
 
 
 def load_css(file_name):
@@ -13,6 +14,67 @@ load_css("css/comp.css")
 def show():
     st.title("Desenvolvimento de componentes")
     st.write("Desenvolvendo e testando componentes antes de usar no sistema")
+   
+  
+    # Dados fictícios
+    data = {
+        "ID": [1, 2, 3, 4, 5, 6, 8, 9, 10, 7],
+        "Nome": [
+            "João Silva",
+            "Maria Oliveira",
+            "Carlos Souza",
+            "Ana Costa",
+            "Fernanda Santos",
+            "Paulo Almeida",
+            "Rafael Rodrigues",
+            "Mariana Lima",
+            "Eduardo Martins",
+            "Juliana Silva Pereira",
+        ],
+        "Email": [
+            "joao.silva@example.com",
+            "maria.oliveira@example.com",
+            "carlos.souza@example.com",
+            "ana.costa@example.com",
+            "fernanda.santos@example.com",
+            "paulo.almeida@example.com",
+            "rafael.rodrigues@example.com",
+            "mariana.lima@example.com",
+            "eduardo.martins@example.com",
+            "juliana.pereira@example.com",
+        ],
+        "Telefone": [
+            "4711987654321",
+            "4721987654321",
+            "4731987654321",
+            "4741987654321",
+            "4751987654321",
+            "4761987654321",
+            "4781987654321",
+            "4791987654321",
+            "4711987654322",
+            "4771987654321",
+        ],
+    }
+
+    df = pd.DataFrame(data)
+
+    # Título
+    st.title("Consulta de Clientes")
+
+    # Entrada de texto para filtro
+    filtro_nome = st.text_input("Digite o nome para filtrar:", "").strip()
+
+    # Filtrar os dados com base no texto digitado
+    if filtro_nome:
+        df_filtrado = df[df["Nome"].str.contains(filtro_nome, case=False, na=False)]
+        st.write(f"Exibindo resultados para: **{filtro_nome}**")
+    else:
+        df_filtrado = df
+        st.write("Exibindo todos os clientes")
+
+    # Exibir a tabela
+    st.dataframe(df_filtrado, use_container_width=True)
 
     option_map = {
         0: ":material/add:",
