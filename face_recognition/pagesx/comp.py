@@ -144,7 +144,7 @@ def show():
     dec_31 = datetime.date(next_year, 12, 31)
 
     d = st.date_input(
-        "Selecione suas férias para o próximo ano",
+        "Buscar arquivos por data :",
         (jan_1, datetime.date(next_year, 1, 7)),
         jan_1,
         dec_31,

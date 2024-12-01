@@ -2,106 +2,67 @@ h1 {
     text-align: center;
 }
 
-/* Estilizar o select principal */
 div[data-baseweb="select"] {
     background-color: transparent;
-    border: 1px solid #007BFF;
-    /* Borda azul */
+    border: 1px solid hsl(358, 94%, 49%);
     border-radius: 4px;
-    /* Bordas arredondadas */
     padding: 5px;
-    /* Espaçamento interno */
 }
 
-/* Estilo ao focar no select */
 div[data-baseweb="select"]:focus {
     outline: none;
-    /* Remove a linha de contorno padrão */
-    border: 1px solid #0056b3;
-    /* Azul escuro ao focar */
+    border: 1px solid hsl(358, 94%, 49%);
 }
 
-/* Para os options do select */
 div[data-baseweb="select"] .css-26l3qy-menu {
     background-color: #fff;
-    /* Cor de fundo dos options */
     color: #333;
-    /* Cor do texto dos options */
-    border: 1px solid #007BFF;
-    /* Borda azul ao redor das opções */
+    border: 1px solid hsl(358, 94%, 49%);
     border-radius: 4px;
-    /* Bordas arredondadas */
 }
 
-/* Opções ao focar */
 div[data-baseweb="select"] .css-26l3qy-menu:hover {
     background-color: #f0f8ff;
-    /* Azul claro ao passar o mouse */
 }
 
-/* Quando a opção está selecionada */
 div[data-baseweb="select"] .css-26l3qy-menu div[aria-selected="true"] {
     background-color: #cce7ff;
-    /* Azul mais claro quando selecionado */
-    color: #0056b3;
-    /* Texto azul escuro */
+    color: hsl(358, 94%, 49%);
 }
 
-/* Inputs de texto e número com borda branca e texto branco */
 .stTextInput input,
 .stNumberInput input {
     padding: 10px;
-    /* Espaçamento interno */
     background-color: transparent;
-    /* Fundo transparente */
     color: white;
-    /* Cor do texto */
     border-radius: 4px;
-    /* Bordas arredondadas */
     border: 1px solid white;
-    /* Borda branca */
 }
 
-/* Manter a borda e texto brancos ao focar nos inputs */
 .stTextInput input:focus,
 .stNumberInput input:focus {
     outline: none;
-    /* Remove o contorno padrão */
     background-color: transparent;
-    /* Fundo transparente */
     color: white;
-    /* Cor do texto */
     border: 1px solid white;
-    /* Borda branca ao focar */
 }
 
-/* Estilizando o botão de envio de formulário */
 .stButton>button {
     background-color: #e31b22;
-    /* Cor de fundo azul */
     color: white;
-    /* Cor do texto */
     border-radius: 4px;
-    /* Bordas arredondadas */
     border: none;
-    /* Remove a borda padrão */
     padding: 10px 20px;
-    /* Espaçamento interno */
     font-size: 14px;
-    /* Tamanho da fonte */
     cursor: pointer;
-    /* Mostra o cursor de clique */
 }
 
-/* Alterar cor do botão ao passar o mouse */
 .stButton>button:hover {
     border: 1px solid #fff;
-    /* Cor de fundo azul escuro */
     color: #fff;
-    background-color: #0056b3;
+    background-color: hsl(358, 94%, 49%);
 }
 
-/* Ocultar header e footer */
 header {
     visibility: hidden;
 }
@@ -110,33 +71,14 @@ footer {
     visibility: hidden;
 }
 
-
-
 .columns-wrapper {
     display: flex;
     justify-content: center;
-    /* Centraliza o container */
     gap: 10px;
-    /* Espaçamento entre colunas */
-    /*background-color: rgb(0, 255, 13);*/
     padding: 20px;
 }
 
 .column {
     width: 100px;
-    /* Ajuste o valor para o tamanho das colunas desejado */
     text-align: center;
-    /* Centraliza o conteúdo dentro da coluna */
 }
-
-/* button style 
-.st-key-add button {
-    background-color: #e31b22;
-}
-
-.st-key-add button:hover {
-    border: 5px solid #fff;
-    
-}
-
-*/
