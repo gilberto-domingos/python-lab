@@ -1,81 +1,106 @@
 import datetime
 import streamlit as st
 import pandas as pd
+import locale
+
+# Função para carregar o CSS
 
 
 def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+# -------------------------------#
 
-load_css("css/comp.css")
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+
+
+def comparate(ativo, passivo):
+    ativo_formatado = locale.currency(ativo, grouping=True)
+    passivo_formatado = locale.currency(passivo, grouping=True)
+
+    if ativo == passivo:
+        return f"Conferência de balanço realizada com sucesso !!! {ativo_formatado}", "green"
+    else:
+        return f"Conferência de balanço possui erros: {ativo_formatado} vs {passivo_formatado}", "red"
+
+
+def display_comparate():
+    ativo = 200000.00
+    options = [46000.00, 500000.00, 200000.00]
+
+    options_formatadas = [locale.currency(
+        val, grouping=True) for val in options]
+
+    st.title("O valor do Ativo é de R$200.000,00")
+
+    option = st.selectbox(
+        "Selecione o valor do passivo:",
+        options=options_formatadas
+    )
+
+    # Encontrar o valor original numérico correspondente ao valor selecionado no selectbox
+    option_valor = options[options_formatadas.index(option)]
+
+    # Comparar o valor do ativo com o valor selecionado
+    resultado, cor = comparate(ativo, option_valor)
+
+    # Mostrar o botão/luz que acende verde/vermelho primeiro
+    st.markdown(f"""
+    <div class="light" style="background-color: {cor};"></div>
+    """, unsafe_allow_html=True)
+
+    # Exibir o resultado com a cor correspondente logo abaixo
+    st.markdown(f"<h3 style='color: {cor};'>{
+                resultado}</h3>", unsafe_allow_html=True)
 
 
 def show():
-    st.title("Desenvolvimento de componentes")
-    st.write("Desenvolvendo e testando componentes antes de usar no sistema")
-   
-  
-    # Dados fictícios
+    display_comparate()
+
+
+def display_clients():
     data = {
         "ID": [1, 2, 3, 4, 5, 6, 8, 9, 10, 7],
         "Nome": [
-            "João Silva",
-            "Maria Oliveira",
-            "Carlos Souza",
-            "Ana Costa",
-            "Fernanda Santos",
-            "Paulo Almeida",
-            "Rafael Rodrigues",
-            "Mariana Lima",
-            "Eduardo Martins",
-            "Juliana Silva Pereira",
+            "João Silva", "Maria Oliveira", "Carlos Souza", "Ana Costa",
+            "Fernanda Santos", "Paulo Almeida", "Rafael Rodrigues",
+            "Mariana Lima", "Eduardo Martins", "Juliana Silva Pereira",
         ],
         "Email": [
-            "joao.silva@example.com",
-            "maria.oliveira@example.com",
-            "carlos.souza@example.com",
-            "ana.costa@example.com",
-            "fernanda.santos@example.com",
-            "paulo.almeida@example.com",
-            "rafael.rodrigues@example.com",
-            "mariana.lima@example.com",
-            "eduardo.martins@example.com",
-            "juliana.pereira@example.com",
+            "joao.silva@example.com", "maria.oliveira@example.com",
+            "carlos.souza@example.com", "ana.costa@example.com",
+            "fernanda.santos@example.com", "paulo.almeida@example.com",
+            "rafael.rodrigues@example.com", "mariana.lima@example.com",
+            "eduardo.martins@example.com", "juliana.pereira@example.com",
         ],
         "Telefone": [
-            "4711987654321",
-            "4721987654321",
-            "4731987654321",
-            "4741987654321",
-            "4751987654321",
-            "4761987654321",
-            "4781987654321",
-            "4791987654321",
-            "4711987654322",
-            "4771987654321",
+            "4711987654321", "4721987654321", "4731987654321", "4741987654321",
+            "4751987654321", "4761987654321", "4781987654321", "4791987654321",
+            "4711987654322", "4771987654321",
         ],
     }
 
     df = pd.DataFrame(data)
 
-    # Título
     st.title("Consulta de Clientes")
-
-    # Entrada de texto para filtro
     filtro_nome = st.text_input("Digite o nome para filtrar:", "").strip()
 
-    # Filtrar os dados com base no texto digitado
     if filtro_nome:
-        df_filtrado = df[df["Nome"].str.contains(filtro_nome, case=False, na=False)]
+        df_filtrado = df[df["Nome"].str.contains(
+            filtro_nome, case=False, na=False)]
         st.write(f"Exibindo resultados para: **{filtro_nome}**")
     else:
         df_filtrado = df
         st.write("Exibindo todos os clientes")
 
-    # Exibir a tabela
     st.dataframe(df_filtrado, use_container_width=True)
 
+# Função para exibir a seleção de ferramentas com ícones
+
+
+def display_tool_selection():
     option_map = {
         0: ":material/add:",
         1: ":material/zoom_in:",
@@ -83,11 +108,9 @@ def show():
         3: ":material/zoom_out_map:",
     }
 
-    # Usando st.radio para criar uma seleção de opções
     selection = st.radio(
         "Ferramenta",
         options=list(option_map.keys()),  # Transforma as chaves em uma lista
-        # Formatação do texto das opções
         format_func=lambda option: option_map[option],
     )
     st.write(
@@ -95,7 +118,10 @@ def show():
         f"{None if selection is None else option_map[selection]}"
     )
 
-    # Dividindo a tela em 4 colunas
+# Função para exibir botões de interação
+
+
+def display_buttons():
     col1, col2, col3, col4 = st.columns(4)
 
     if col1.button("Botão simples", use_container_width=True):
@@ -110,34 +136,10 @@ def show():
     if col4.button("Botão customizado", icon="🔥", use_container_width=True):
         col4.markdown("Você clicou no botão customizado.")
 
-    # Novas colunas para outros botões
-    col1, col2, col3, col4 = st.columns(4)
+# Função para exibir o seletor de data
 
-    with col1:
-        if st.button('Botão 1'):
-            st.write("Botão 1 clicado")
-    with col2:
-        if st.button('Botão 2'):
-            st.write("Botão 2 clicado")
-    with col3:
-        if st.button('Botão 3'):
-            st.write("Botão 3 clicado")
-    with col4:
-        if st.button('Botão 4'):
-            st.write("Botão 4 clicado")
 
-    # Criando mais colunas para links
-    col5, col6, col7, col8 = st.columns(4)
-
-    with col5:
-        st.link_button("Link 1", "https://docs.1")
-    with col6:
-        st.link_button("Link 2", "https://docs.2")
-    with col7:
-        st.link_button("Link 3", "https://docs.3")
-    with col8:
-        st.link_button("Link 4", "https://streamlit.4")
-
+def display_date_input():
     today = datetime.datetime.now()
     next_year = today.year + 1
     jan_1 = datetime.date(next_year, 1, 1)
@@ -155,24 +157,13 @@ def show():
                       datetime.date(2019, 7, 6))
     st.write("A data selecionada foi:", d)
 
-    # Definindo as opções para direção
-    options = ["Norte", "Leste", "Sul", "Oeste"]
+# Função principal para carregar todos os componentes
 
-    # Usando st.multiselect para seleção múltipla
-    selection = st.multiselect(
-        "Direções", options
-    )
 
-    row1 = st.columns(3)
-    row2 = st.columns(3)
-
-    for col in row1 + row2:
-        tile = col.container(height=120)
-        tile.title(":balloon:")
-
-    enable = st.checkbox("Ativar a sua câmera")
-    picture = st.camera_input(
-        "Abaixo clique para tirar a foto", disabled=not enable)
-
-    if picture:
-        st.image(picture)
+def show():
+    load_css("css/comp.css")
+    display_comparate()
+    display_clients()
+    display_tool_selection()
+    display_buttons()
+    display_date_input()

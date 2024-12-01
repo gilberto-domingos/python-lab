@@ -82,3 +82,25 @@ footer {
     width: 100px;
     text-align: center;
 }
+
+
+/* Estilo para a luz */
+.light {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px #000;
+    margin: 10px auto;
+    transition: background-color 0.3s ease;
+
+}
+
+/* Luz verde */
+.green {
+    background-color: green;
+}
+
+/* Luz vermelha */
+.red {
+    background-color: red;
+}
