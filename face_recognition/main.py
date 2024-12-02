@@ -54,7 +54,7 @@ with st.sidebar:
     selected = option_menu(
         "Mosimann",
         [
-            "Comp",
+            "Componentes",
             "Home",
             "Cadastro",
             "Sistema",
@@ -91,7 +91,7 @@ with st.sidebar:
         default_index=1,
     )
 
-if selected == "Comp":
+if selected == "Componentes":
     from pagesx import comp
     comp.show()
 
