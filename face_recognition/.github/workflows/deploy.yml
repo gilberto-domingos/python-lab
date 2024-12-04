@@ -33,5 +33,7 @@ jobs:
 
           # Reiniciar o container, se necessário (opcional)
           docker stop mosimann-streamlit
-
           docker start mosimann-streamlit
+
+          # Ativar o ambiente virtual
+          docker exec mosimann-streamlit /bin/bash -c "source /aContabil/.venv/bin/activate && echo 'Ambiente virtual ativado!'"

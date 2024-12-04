@@ -13,11 +13,12 @@ class Database:
         if self.conn is None or self.conn.closed:
             try:
                 self.conn = psycopg2.connect(
-                    host="mosimann-database",  # Ou "172.17.0.2"
-                    port="5432",
+                    dbname="contabil",
                     database="contabil",
                     user="mmss",
-                    password="mmssmmnn"
+                    password="mmssmmnn",
+                    host="mosimann-database",
+                    port=5432
                 )
                 print("Conexão com o banco de dados estabelecida.")
             except psycopg2.Error as e:
@@ -29,7 +30,8 @@ class Database:
         if self.conn is None or self.conn.closed:
             self.connect()
         if self.conn is None or self.conn.closed:
-            raise Exception("Falha ao estabelecer conexão com o banco de dados.")
+            raise Exception(
+                "Falha ao estabelecer conexão com o banco de dados.")
 
     def fetch_all_clients(self):
         """Busca todos os clientes no banco de dados."""
@@ -43,7 +45,7 @@ class Database:
         self.ensure_connection()
         cur = self.conn.cursor()
         cur.execute(
-            "INSERT INTO clients (name, email, phone) VALUES (%s, %s, %s) RETURNING id", 
+            "INSERT INTO clients (name, email, phone) VALUES (%s, %s, %s) RETURNING id",
             (name, email, phone)
         )
         self.conn.commit()
