@@ -51,7 +51,7 @@ def show():
             <div style="display: flex; align-items: center;">
                 <span class="status-indicator"></span> Online
             </div>
-            <div>Usuário: Pedro Silva</div>
+            <div><span class="status-indicator"></span> Itamar Mosimann</div>
             <div>Empresa: Mosimann LTDA</div>
         </div>
         """,
