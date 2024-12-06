@@ -1,0 +1,139 @@
+/* Barra azul no topo */
+#barra-superior {
+    position: fixed;
+    /* Fixa a barra no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Faz a barra ocupar toda a largura */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*background-color: #e31b22;*/
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    /* Garante que a barra fique sobre outros elementos */
+    box-sizing: border-box;
+}
+
+/* Indicador de status como bolinha verde */
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    background-color: #28a745;
+    /* Verde */
+    border-radius: 50%;
+}
+
+/* Espaçamento entre os itens */
+#barra-superior>div {
+    margin: 0 10px;
+}
+
+/* Ajuste de layout para o conteúdo abaixo da barra */
+#conteudo {
+    margin-top: 60px;
+    /* Evita sobreposição do conteúdo com a barra */
+}
+
+/* Tabela estilizada */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: center;
+    /* Centraliza horizontalmente */
+    vertical-align: middle;
+    /* Centraliza verticalmente */
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e8f5ff;
+}
+
+/* Ícones e controles acima da tabela */
+#tabela-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+#search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.tabela-container {
+    margin-top: 20px;
+}
+
+/* Estilos para a tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #16181e;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #1c1d24;
+}
+
+tr:hover {
+    background-color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+/* Responsividade */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+
+    #barra-superior {
+        flex-direction: column;
+        text-align: center;
+    }
+}

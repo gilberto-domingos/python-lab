@@ -3,19 +3,13 @@ import streamlit as st
 import pandas as pd
 import locale
 
-# Função para carregar o CSS
-
 
 def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# -------------------------------#
 
-
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-
-
+# -------------------------------------------------------------------
 def comparate(ativo, passivo):
     ativo_formatado = locale.currency(ativo, grouping=True)
     passivo_formatado = locale.currency(passivo, grouping=True)
@@ -54,6 +48,7 @@ def display_comparate():
     # Exibir o resultado com a cor correspondente logo abaixo
     st.markdown(f"<h3 style='color: {cor};'>{
                 resultado}</h3>", unsafe_allow_html=True)
+# -----------------------------------------------------------------------
 
 
 def show():
@@ -97,7 +92,7 @@ def display_clients():
 
     st.dataframe(df_filtrado, use_container_width=True)
 
-# Função para exibir a seleção de ferramentas com ícones
+# -----------------------------------------------------------------------------------
 
 
 def display_tool_selection():
@@ -118,7 +113,7 @@ def display_tool_selection():
         f"{None if selection is None else option_map[selection]}"
     )
 
-# Função para exibir botões de interação
+# ---------------------------------------------------------------------------------
 
 
 def display_buttons():
@@ -136,7 +131,9 @@ def display_buttons():
     if col4.button("Botão customizado", icon="🔥", use_container_width=True):
         col4.markdown("Você clicou no botão customizado.")
 
-# Função para exibir o seletor de data
+
+# ----------------------------------------------------------------------
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 
 def display_date_input():
@@ -157,7 +154,7 @@ def display_date_input():
                       datetime.date(2019, 7, 6))
     st.write("A data selecionada foi:", d)
 
-# Função principal para carregar todos os componentes
+# ------------------------------------------------------------
 
 
 def show():

@@ -57,18 +57,13 @@ with st.sidebar:
             "Componentes",
             "Home",
             "Cadastro",
-            "Sistema",
-            "Obrigações",
             "Empresas",
-            "Lista de entregas",
-            "Gestão de Pessoas",
             "Solicitações",
             "Método APLA",
             "Dashboards",
             "Relatórios",
             "Imagens",
-            "CSV",
-            "Teste DB",  # Adicionando nova opção no menu
+            "CSV"
         ],
         icons=[
             "list-check",
@@ -103,22 +98,9 @@ elif selected == "Cadastro":
     from pagesx import crud
     crud.show()
 
-elif selected == "Sistema":
-    from pagesx import sys
-    sys.show()
-
-elif selected == "Obrigações":
-    st.title("Obrigações")
-
 elif selected == "Empresas":
     from pagesx import companies
     companies.show()
-
-elif selected == "Lista de entregas":
-    st.title("Lista de Entregas")
-
-elif selected == "Gestão de Pessoas":
-    st.title("Gestão de Pessoas")
 
 elif selected == "Solicitações":
     st.title("Solicitações")
@@ -143,8 +125,3 @@ elif selected == "Imagens":
 elif selected == "CSV":
     from pagesx import csv
     csv.show()
-
-elif selected == "Teste DB":
-    st.title("Teste de Conexão com o Banco de Dados")
-    if st.button("Testar Conexão"):
-        testar_conexao()
