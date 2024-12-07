@@ -3,10 +3,8 @@ from streamlit_option_menu import option_menu
 import pathlib
 import psycopg2
 
-# Configuração da página
-st.set_page_config(page_title="Mosimann", page_icon=":bar_chart:")
-
-# Função para carregar CSS
+st.set_page_config(page_title="Mosimann",
+                   page_icon=":bar_chart:")
 
 
 def load_css(file_name):
@@ -14,32 +12,8 @@ def load_css(file_name):
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
-# Carregar o CSS customizado
 load_css("css/style.css")
 
-# Esconder o rodapé, mas manter o cabeçalho visível (e o botão de Settings)
-st.markdown(
-    """
-    <style>
-    footer {visibility: hidden;}  /* Esconde o rodapé */
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Barra superior
-st.markdown(
-    '''
-    <div id="barra-superior">
-        <div style="display: flex; align-items: center;">
-            <span class="status-indicator"></span> Online
-        </div>
-        <div><span class="status-indicator"></span> Itamar Mosimann</div>
-        <div>Empresa: Mosimann LTDA</div>
-    </div>
-    ''',
-    unsafe_allow_html=True,
-)
 
 # Configurações do banco de dados
 DB_HOST = "mosimann-database"  # Nome do serviço no docker-compose
@@ -48,10 +22,11 @@ DB_NAME = "contabil"          # Nome do banco de dados
 DB_USER = "mmss"              # Usuário configurado
 DB_PASS = "mmssmmnn"          # Senha configurada
 
-# Função para testar a conexão com o banco de dados
-
 
 def testar_conexao():
+    """
+    Função para testar a conexão com o banco de dados.
+    """
     try:
         conn = psycopg2.connect(
             host=DB_HOST,
@@ -66,7 +41,6 @@ def testar_conexao():
         st.error(f"Erro ao conectar ao banco de dados: {e}")
 
 
-# Menu lateral
 with st.sidebar:
     selected = option_menu(
         "Mosimann",
@@ -103,7 +77,6 @@ with st.sidebar:
         default_index=1,
     )
 
-# Exibição do conteúdo dependendo da seleção no menu
 if selected == "Componentes":
     from pagesx import comp
     comp.show()
