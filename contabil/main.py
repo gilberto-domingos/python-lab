@@ -103,7 +103,8 @@ elif selected == "Empresas":
     companies.show()
 
 elif selected == "Solicitações":
-    st.title("Solicitações")
+    from pagesx import request
+    request.show()
 
 elif selected == "Método APLA":
     from pagesx import apla
