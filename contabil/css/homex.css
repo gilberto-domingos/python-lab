@@ -1,37 +1,4 @@
-#barra-superior {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #262730;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    z-index: 1000;
-    box-sizing: border-box;
-}
-
-.status-indicator {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-    background-color: #28a745;
-    border-radius: 50%;
-}
-
-#barra-superior>div {
-    margin: 0 10px;
-}
-
-#conteudo {
-    margin-top: 60px;
-}
-
+/* Estilo da tabela */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -53,17 +20,20 @@ tr:hover {
     background-color: #e8f5ff;
 }
 
+/* Controles da tabela */
 #tabela-controls {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
+/* Estilo de contêiner de ícones */
 .icon-container {
     display: flex;
     align-items: center;
 }
 
+/* Input de busca */
 #search-input {
     width: 100%;
     padding: 8px;
@@ -71,34 +41,37 @@ tr:hover {
     font-size: 14px;
 }
 
+/* Contêiner da tabela */
 .tabela-container {
     margin-top: 20px;
 }
 
+/* Estilo do cabeçalho da tabela */
 th {
     background-color: #16181e;
     color: white;
 }
 
+/* Estilo das linhas pares */
 tr:nth-child(even) {
     background-color: #1c1d24;
 }
 
+/* Estilo para hover */
 tr:hover {
     background-color: #000;
 }
 
-
-
-
-/* Responsividade */
+/* Responsividade para telas menores */
 @media screen and (max-width: 768px) {
     table {
         font-size: 12px;
     }
 
+    /*
     #barra-superior {
         flex-direction: column;
         text-align: center;
     }
+    */
 }
