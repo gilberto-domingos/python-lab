@@ -1,3 +1,6 @@
+#streamlit
+.streamlit/config.toml
+
 # Python
 __pycache__/
 *.py[cod]
