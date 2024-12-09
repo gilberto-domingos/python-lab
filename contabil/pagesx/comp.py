@@ -8,6 +8,20 @@ def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+        # Barra superior
+    st.markdown(
+        '''
+        <div id="barra-superior">
+            <div style="display: flex; align-items: center;">
+                <span class="status-indicator"></span> Online
+            </div>
+            <div><span class="status-indicator"></span> Itamar Mosimann</div>
+            <div>Empresa: Mosimann LTDA</div>
+        </div>
+        ''',
+        unsafe_allow_html=True,
+    )
+
 
 def apply_light_theme():
     primary_color = "#FF4B4B"
@@ -86,6 +100,9 @@ def button():
         apply_light_theme()
     else:
         apply_dark_theme()
+
+
+# --------------------------------------------------------------------
 
 
 # -------------------------------------------------------------------

@@ -1,11 +1,8 @@
-/* Estilo da barra superior */
 #barra-superior {
     position: fixed;
     top: 0;
     left: 50%;
-    /* Alinha a barra com o centro da tela */
     width: calc(100% - 140px);
-    /* Mantém a largura diminuída */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,9 +14,7 @@
     z-index: 99999 !important;
     box-sizing: border-box;
     margin-top: 40px;
-    /* Deixa um espaço para não sobrepor o menu do Streamlit */
     transform: translateX(-50%);
-    /* Centraliza a barra, mas a desloca para o meio da tela */
 }
 
 .stApp {
