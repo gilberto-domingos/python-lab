@@ -104,3 +104,74 @@ footer {
 .red {
     background-color: red;
 }
+
+/* Estilo da tabela */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e8f5ff;
+}
+
+/* Controles da tabela */
+#tabela-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* Estilo de contêiner de ícones */
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Input de busca */
+#search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+/* Contêiner da tabela */
+.tabela-container {
+    margin-top: 20px;
+}
+
+/* Estilo do cabeçalho da tabela */
+th {
+    background-color: #16181e;
+    color: white;
+}
+
+/* Estilo das linhas pares */
+tr:nth-child(even) {
+    background-color: #1c1d24;
+}
+
+/* Estilo para hover */
+tr:hover {
+    background-color: #000;
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 12px;
+    }
+}

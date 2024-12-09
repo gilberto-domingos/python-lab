@@ -2,11 +2,10 @@ import streamlit as st
 
 
 def apply_light_theme():
-    """Aplica o tema claro na página."""
     primary_color = "#FF4B4B"
-    background_color = "#61697a"
-    secondary_background_color = "#61697a"
-    text_color = "#333333"
+    background_color = "#ffffff"
+    secondary_background_color = "#F0F2F6"
+    text_color = "#31333F"
     font = "sans serif"
 
     st.markdown(
@@ -32,9 +31,8 @@ def apply_light_theme():
 
 
 def apply_dark_theme():
-    """Aplica o tema escuro na página."""
     primary_color = "#e31b22"
-    background_color = "#262730"
+    background_color = "#0E1117"
     secondary_background_color = "#262730"
     text_color = "#fafafa"
     font = "sans serif"
