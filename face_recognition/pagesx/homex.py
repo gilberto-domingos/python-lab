@@ -12,7 +12,6 @@ def carregar_css(caminho):
 
 
 def show():
-    # Dados da tabela com empresas brasileiras famosas
     dados = [
         ["001", "Petrobras", "01/24", "A1", "João Silva",
          10, 5, "01/12/2024", 20, 200, 50],
@@ -36,7 +35,6 @@ def show():
          9, 6, "10/12/2024", 27, 330, 65],
     ]
 
-    # Converter para DataFrame
     df = pd.DataFrame(dados, columns=[
         "Código", "Empresa", "Balanço", "Célula", "Funcionário", "T.E", "R.T", "Fech.Balanço", "IR", "V.", "R"
     ])
@@ -46,10 +44,8 @@ def show():
 
     st.title("Conferência de Balanço")
 
-    # Exibir a tabela como DataFrame do Streamlit
     st.dataframe(df, use_container_width=True)
 
-    # Exibir a tabela em HTML
     tabela_html = """
     <table>
         <thead>
