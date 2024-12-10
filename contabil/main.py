@@ -9,6 +9,8 @@ st.set_page_config(
     layout="wide"
 )
 
+# Função para carregar o arquivo CSS externo
+
 
 def load_css(file_name):
     with open(file_name) as f:
@@ -17,33 +19,20 @@ def load_css(file_name):
 
 load_css("css/style.css")
 
+# Ocultar botão do header e footer padrão do Streamlit
 st.markdown(
     """
     <style>
         button[data-testid="stBaseButton-header"] {
             display: none !important;
         }
+        footer {visibility: hidden;}
     </style>
     """,
     unsafe_allow_html=True,
 )
 
-st.markdown(
-    """
-    <style>
-    footer {visibility: hidden;}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    '''
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    ''',
-    unsafe_allow_html=True,
-)
-
+# Configuração da barra lateral
 with st.sidebar:
     st.markdown(
         '''
@@ -101,6 +90,7 @@ with st.sidebar:
         default_index=1,
     )
 
+# Tratamento para cada opção do menu
 if selected == "Componentes":
     from pagesx import comp
     comp.show()
@@ -110,8 +100,46 @@ elif selected == "Home":
     homex.show()
 
 elif selected == "Cadastro":
-    from pagesx import crud
-    crud.show()
+    cadastro_menu = option_menu(
+        "Opções de Cadastro",
+        [
+            "Clientes",
+            "Célula",
+            "Funcionário",
+            "Tipo de empresa",
+            "Regime tributario",
+        ],
+        icons=[
+            "person-lines-fill",
+            "box",
+            "person-bounding-box",
+            "building",
+            "list-check",
+        ],
+        menu_icon="card-list",
+        default_index=0,
+        orientation="horizontal",
+    )
+
+    if cadastro_menu == "Clientes":
+        from pagesx import customers
+        customers.show()
+
+    elif cadastro_menu == "Célula":
+        from pagesx import cell
+        cell.show()
+
+    elif cadastro_menu == "Funcionário":
+        from pagesx import employee
+        employee.show()
+
+    elif cadastro_menu == "Tipo de empresa":
+        from pagesx import comp_regis
+        comp_regis.show()
+
+    elif cadastro_menu == "Regime tributario":
+        from pagesx import tax_regime
+        tax_regime.show()
 
 elif selected == "Empresas":
     from pagesx import companies
