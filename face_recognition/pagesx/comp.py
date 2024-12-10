@@ -12,10 +12,55 @@ def load_css(file_name):
             st.title("Componentes")
             st.markdown(
                 '<p class="subtitle">Página para desenvolver, testar e aprimorar componentes antes de usar no sistema</p>',
-                unsafe_allow_html=True,
-            )
+                unsafe_allow_html=True,)
 
-        # Barra superior
+# --------------------------------------------------------------------------
+
+
+def do_view_tasks():
+    print('clicked View Tasks')
+
+
+def do_manage_tasks():
+    print('clicked Manage Tasks')
+
+
+def do_chart3():
+    print('clicked Upload')
+
+
+menu = {
+    'title': 'Menu principal',
+    'items': {
+        'Home': {
+            'action': None, 'item_icon': 'house', 'submenu': {
+                'title': None,
+                'items': {
+                    'Task': {'action': do_view_tasks, 'item_icon': 'list-task', 'submenu': None},
+                    'Manage': {'action': do_manage_tasks, 'item_icon': 'list-check', 'submenu': None},
+                    'Upload': {'action': do_chart3, 'item_icon': 'cloud-upload-fill', 'submenu': None},
+                },
+            }
+        },
+    },
+}
+
+# Simulate a menu selection
+menu_selection = 'Home'
+selected_item = 'Manage'
+
+if menu_selection == 'Home':
+    submenu = menu['items'][menu_selection]['submenu']
+    if submenu is not None and selected_item in submenu['items']:
+        action = submenu['items'][selected_item]['action']
+        if action is not None:
+            # Call the action (click event handler)
+            action()
+
+
+# -------------------------------------------------------------
+
+    # Barra superior
     st.markdown(
         '''
         <div id="barra-superior">
@@ -308,6 +353,12 @@ def display_date_input():
 def show():
     load_css("css/comp.css")
     title()
+# --------------------
+    # select()
+    do_view_tasks()
+    do_manage_tasks()
+    do_chart3()
+
     button()
     display_comparate()
     display_clients()

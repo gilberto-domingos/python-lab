@@ -114,8 +114,8 @@ elif selected == "Cadastro":
     crud.show()
 
 elif selected == "Empresas":
-    from pagesx import companies
-    companies.show()
+    from pagesx import comp_regis
+    comp_regis.show()
 
 elif selected == "Solicitações":
     st.title("Solicitações")

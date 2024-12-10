@@ -21,8 +21,9 @@ if selected_page == "Página Inicial":
     # Adicione o conteúdo da página inicial aqui
 elif selected_page == "Empresas":
     st.title("Empresas")
-    import pagesx.companies as companies  # Certifique-se de que companies.py está na pasta pages
-    companies.show()  # Chame a função show() da página companies.py
+    # Certifique-se de que companies.py está na pasta pages
+    import pagesx.comp_regis as comp_regis
+    comp_regis.show()  # Chame a função show() da página companies.py
 elif selected_page == "Sistemas":
     st.title("Sistemas")
     import pagesx.sys as sys  # Certifique-se de que sys.py está na pasta pages
