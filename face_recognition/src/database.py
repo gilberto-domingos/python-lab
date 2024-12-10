@@ -14,7 +14,6 @@ class Database:
             try:
                 self.conn = psycopg2.connect(
                     dbname="contabil",
-                    database="contabil",
                     user="mmss",
                     password="mmssmmnn",
                     host="mosimann-database",
