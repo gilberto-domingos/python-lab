@@ -1,16 +1,11 @@
 import streamlit as st
 import pandas as pd
-from streamlit_searchbox import st_searchbox
+from st_keyup import st_keyup
 
 
 def carregar_css(caminho):
     with open(caminho) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-
-def buscar_empresa(searchterm, df):
-    # Função de busca que retorna uma lista com empresas correspondentes ao termo
-    return df[df['Empresa'].str.contains(searchterm, case=False, na=False)]['Empresa'].tolist()
 
 
 def show():
@@ -39,26 +34,6 @@ def show():
             10, 5, "09/12/2024", 25, 310, 58],
         ["010", "Vale", "10/24", "J10", "Sara Leite",
             9, 6, "10/12/2024", 27, 330, 65],
-        ["011", "Petrobras", "11/24", "K11", "Juliana Souza",
-            8, 7, "11/12/2024", 18, 400, 70],
-        ["012", "Ambev", "12/24", "L12", "Rodrigo Castro",
-            12, 6, "12/12/2024", 20, 500, 75],
-        ["013", "Bradesco", "01/25", "M13", "Fabiana Melo",
-            10, 5, "01/01/2025", 15, 320, 60],
-        ["014", "Eletrobras", "02/25", "N14", "Gustavo Rocha",
-            11, 6, "02/01/2025", 22, 310, 68],
-        ["015", "Petrobras", "03/25", "O15", "Renata Lima",
-            9, 8, "03/01/2025", 24, 300, 72],
-        ["016", "Nubank", "04/25", "P16", "Carla Teixeira",
-            13, 7, "04/01/2025", 28, 350, 77],
-        ["017", "Itaú Unibanco", "05/25", "Q17",
-            "Tiago Ramos", 12, 6, "05/01/2025", 30, 250, 63],
-        ["018", "Ambev", "06/25", "R18", "Julio César",
-            14, 5, "06/01/2025", 18, 400, 80],
-        ["019", "PagSeguro", "07/25", "S19", "Bianca Ferreira",
-            15, 4, "07/01/2025", 25, 420, 78],
-        ["020", "Gerdau", "08/25", "T20", "Lucas Moreira",
-            13, 6, "08/01/2025", 27, 390, 74],
     ]
 
     # Criação do DataFrame
@@ -69,17 +44,15 @@ def show():
     # Exibição do título
     st.title("Conferência de Balanço")
 
-    # Componente de busca
-    searchterm = st_searchbox(
-        lambda term: buscar_empresa(term, df),
-        placeholder="Buscar empresa...",
-        key="busca_empresa",
-    )
+    # Componente de filtro dinâmico
+    filtro = st_keyup("Digite para filtrar por empresa:",
+                      debounce=300, key="filtro_empresa")
 
-    # Filtrar a tabela com base na busca
-    if searchterm:
-        df_filtrado = df[df['Empresa'] == searchterm]
-        st.write(f"Resultados para: **{searchterm}**")
+    # Filtrar a tabela com base no texto digitado
+    if filtro:
+        df_filtrado = df[df["Empresa"].str.contains(
+            filtro, case=False, na=False)]
+        st.write(f"Exibindo resultados para: **{filtro}**")
     else:
         df_filtrado = df
         st.write("Exibindo todas as empresas.")
