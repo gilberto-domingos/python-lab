@@ -8,6 +8,13 @@ def load_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+        def title():
+            st.title("Componentes")
+            st.markdown(
+                '<p class="subtitle">Página para desenvolver, testar e aprimorar componentes antes de usar no sistema</p>',
+                unsafe_allow_html=True,
+            )
+
         # Barra superior
     st.markdown(
         '''
