@@ -23,6 +23,14 @@ def load_css(file_name):
     )
 
 
+def title():
+    st.title("Componentes")
+    st.markdown(
+        '<p class="subtitle">Página para desenvolver, testar e aprimorar componentes antes de usar no sistema</p>',
+        unsafe_allow_html=True,
+    )
+
+
 def apply_light_theme():
     primary_color = "#FF4B4B"
     background_color = "#ffffff"
@@ -292,6 +300,7 @@ def display_date_input():
 
 def show():
     load_css("css/comp.css")
+    title()
     button()
     display_comparate()
     display_clients()

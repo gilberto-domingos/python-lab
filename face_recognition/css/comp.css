@@ -1,3 +1,7 @@
+.subtitle {
+    text-align: center;
+}
+
 #barra-superior {
     position: fixed;
     top: 0;
