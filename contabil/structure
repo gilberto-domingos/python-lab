@@ -1,0 +1,38 @@
+project_name/
+├── .git/                        # Diretório do repositório Git
+├── .streamlit/                  # Diretório para configurações do Streamlit
+│   └── config.toml              # Arquivo de configuração do Streamlit
+├── ansible/
+│   ├── inventories/
+│   ├── roles/
+│   ├── playbooks/
+│   └── ansible.cfg
+├── docker/
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── init/
+│       └── init.sql
+├── scripts/
+│   ├── backup_db.sh
+│   ├── migrate_db.py
+│   └── seed_db.py
+├── src/                    # Código-fonte principal
+│   ├── app/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── views/
+│   │   ├── utils/
+│   │   ├── static/
+│   │   ├── __init__.py
+│   │   └── main.py
+│   └── config/
+│       ├── dev.env
+│       ├── prod.env
+│       └── settings.py
+├── tests/
+├── requirements.txt
+├── .env
+├── .gitignore
+├── README.md
+└── LICENSE
+

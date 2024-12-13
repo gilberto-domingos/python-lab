@@ -1,67 +1,70 @@
-#streamlit
-.streamlit/config.toml
+# Docker
+docker-compose.override.yml
+docker-compose.yml
+docker/Dockerfile
+docker/.env
+.docker/
+docker-init/
 
-# Python
+# Containers e volumes do Docker
+**/node_modules/
+**/dist/
+**/build/
+
+# Arquivos de ambiente
+.env
+*.env
+
+# Python bytecode
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
 *.pyd
-*.env
-.venv
-env
-*.tar
-
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
 *.py[cod]
-*$py.class
-
-# Cython debug symbols
 *.pyd
 *.so
 *.dll
+*$py.class
+
+# Diretórios do sistema
+.DS_Store
+
+# Editor/IDE (VSCode, PyCharm)
+.vscode/
+.idea/
+
+# Arquivos de log
+*.log
+*.out
+
+# Streamlit
+.streamlit/
+.streamlit/config.toml
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints
 
-# Visual Studio Code settings
-.vscode/
-
-# Environment variables
-.env
+# Ambientes virtuais
 .venv/
 env/
 venv/
 ENV/
 
-# Streamlit cache
-.streamlit/
-
-# PostgreSQL dumps or database credentials
+# PostgreSQL
 *.sql
 pg_data/
+pgdata/
 *.dump
+pg_log/
 
-# Logs
-*.log
-*.out
-
-# macOS specific files
-.DS_Store
-
-# System files
-Thumbs.db
-
-# PyCharm specific files
-.idea/
-
-# Temporary files
+# Arquivos temporários
 *.swp
 *.swo
 *.bak
 *.tmp
 
+# Arquivos específicos do sistema
+Thumbs.db
 
 # Angular
 node_modules/
@@ -72,13 +75,7 @@ dist/
 *.jar
 *.war
 *.ear
-*.log
-*.tmp
-*.swp
 
-# PostgreSQL
-*.sql
-pgdata/
-pg_log/
-
+# Outros arquivos específicos
 data/relatorio_situationx.xlsx
+
