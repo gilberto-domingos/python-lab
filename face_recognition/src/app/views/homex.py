@@ -3,14 +3,14 @@ import pandas as pd
 from st_keyup import st_keyup
 
 
-def carregar_css(caminho):
-    with open(caminho) as f:
+def carregar_css(file_name):
+    with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 def show():
     # Carregar o CSS primeiro
-    carregar_css("css/homex.css")
+    carregar_css("src/app/css/homex.css")
 
     # Dados para o DataFrame
     dados = [

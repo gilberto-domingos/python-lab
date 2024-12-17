@@ -2,6 +2,8 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 import pathlib
 import psycopg2
+from dotenv import load_dotenv
+import os
 
 st.set_page_config(
     page_title="Mosimann",
@@ -16,7 +18,7 @@ def load_css(file_name):
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
-load_css("css/style.css")
+load_css("src/app/css/style.css")
 st.markdown(
     """
     <style>
@@ -185,3 +187,15 @@ elif selected == "Imagens":
 elif selected == "CSV":
     from views import csv
     csv.show()
+
+
+# Carrega as variáveis do arquivo .env
+load_dotenv()
+
+# Acessa as variáveis de ambiente
+database_url = os.getenv("DATABASE_URL")
+secret_key = os.getenv("SECRET_KEY")
+debug = os.getenv("DEBUG")
+
+# Caso o SECRET_KEY tenha quebras de linha, o strip() pode ser usado para removê-las
+secret_key = secret_key.strip() if secret_key else None
