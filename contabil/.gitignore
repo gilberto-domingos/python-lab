@@ -6,6 +6,8 @@ docker/.env
 .docker/
 docker-init/
 
+
+
 # Containers e volumes do Docker
 **/node_modules/
 **/dist/
@@ -49,6 +51,11 @@ __pycache__/
 env/
 venv/
 ENV/
+
+.git
+.env
+.venv
+.streamlit/
 
 # PostgreSQL
 *.sql

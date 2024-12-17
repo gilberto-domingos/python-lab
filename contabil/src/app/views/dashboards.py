@@ -1,13 +1,17 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
+base_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(base_dir, "../data/supermarket_sales.csv")
+df = pd.read_csv(file_path, sep=",")
 
 
 def show():
-    # Carregar o conjunto de dados
+    # Carregar o conjunto de dados src/app/views/dashboards.py  /home/jr/Mosimann/src/app/data/supermarket_sales.csv
     try:
         df = pd.read_csv(
-            "./data/supermarket_sales.csv", sep=","
+            "./app/src/app/data/supermarket_sales.csv", sep=","
         )  # Ajuste o caminho se necessário
     except FileNotFoundError as e:
         st.error(
@@ -16,7 +20,8 @@ def show():
         raise e  # Relevanta a exceção após registrar
 
     # Converter a coluna 'Data' para datetime
-    df["Data"] = pd.to_datetime(df["Data"], format="%m/%d/%Y")  # Formato correto
+    df["Data"] = pd.to_datetime(
+        df["Data"], format="%m/%d/%Y")  # Formato correto
 
     # Extrair mês e ano no formato mm/yyyy
     df["Month_Year"] = df["Data"].dt.strftime("%m/%Y")  # Formato mm/yyyy
@@ -67,7 +72,8 @@ def show():
     if (
         total_faturamento > 0
     ):  # Verifica se o total não é zero para evitar divisão por zero
-        city_total["Porcentagem"] = (city_total["Total"] / total_faturamento) * 100
+        city_total["Porcentagem"] = (
+            city_total["Total"] / total_faturamento) * 100
     else:
         city_total["Porcentagem"] = (
             0  # Se o total for zero, define a porcentagem como zero
