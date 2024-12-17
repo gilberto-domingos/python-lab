@@ -1,7 +1,10 @@
-code ~/.config/Code/User/settings.json
 
-#-------------------------
+
+############################################
+
+# -------------------------
 import streamlit as st
+
 
 def apply_light_theme():
     primary_color = "#FF4B4B"
@@ -67,7 +70,8 @@ def show():
         st.session_state["theme"] = "Escuro"
 
     # Alternar o tema quando o toggle for alterado
-    on = st.toggle("🌓 Claro/Escuro", key="theme_toggle", value=st.session_state["theme"] == "Claro")
+    on = st.toggle("🌓 Claro/Escuro", key="theme_toggle",
+                   value=st.session_state["theme"] == "Claro")
 
     if on:
         st.session_state["theme"] = "Claro"
@@ -80,16 +84,13 @@ def show():
     else:
         apply_dark_theme()
 
+
 # Chamar a função show()
 if __name__ == "__main__":
     show()
 
 
-
 ///////////////////////////////////////////////////////////
-
-
-
 
 
 def apply_light_theme():
@@ -153,23 +154,16 @@ def apply_dark_theme():
 
 
 [theme]
-base="light"
-secondaryBackgroundColor="#ffffff"
+base = "light"
+secondaryBackgroundColor = "#ffffff"
 
 [theme]
-base="dark"
-backgroundColor="#262730"
-
-
-
-
-
-
-
+base = "dark"
+backgroundColor = "#262730"
 
 
 **/.git
-autopep8 --aggressive --in-place seu_arquivo.py
+autopep8 - -aggressive - - in -place seu_arquivo.py
 ############################ TRASFERENCIA DIRETA SEM CONTAINER ################################
 
 1. Transferência direta do projeto para o container rodando no servidor
@@ -180,23 +174,23 @@ Transfira os arquivos do projeto para o servidor: No terminal local:
 
 bash
 Copiar código
-scp -r ~/aMosimann/aContabil/* mosimann@186.250.185.87:/home/mosimann/aContabil/
+scp - r ~/aMosimann/aContabil/* mosimann@186.250.185.87: / home/mosimann/aContabil/
 Copie os arquivos para dentro do container: No servidor:
 
 bash
 Copiar código
-docker cp /home/mosimann/aContabil/. mosimann-streamlit-1:/app/
-Aqui, /app/ é o diretório onde o código está localizado dentro do container. Certifique-se de ajustar o caminho conforme necessário.
+docker cp / home/mosimann/aContabil/. mosimann-streamlit-1: / app/
+Aqui, / app / é o diretório onde o código está localizado dentro do container. Certifique-se de ajustar o caminho conforme necessário.
 
-Reinicie o serviço Streamlit dentro do container (se necessário): No servidor:
+Reinicie o serviço Streamlit dentro do container(se necessário): No servidor:
 
 bash
 Copiar código
-docker exec -it mosimann-streamlit-1 pkill -f streamlit
-docker exec -it mosimann-streamlit-1 streamlit run main.py --server.port 8501
+docker exec - it mosimann-streamlit-1 pkill - f streamlit
+docker exec - it mosimann-streamlit-1 streamlit run main.py - -server.port 8501
 
-2. Apagar e recriar o container (usando imagem atualizada)
-Se você preferir uma abordagem mais limpa ou precisar de uma atualização mais abrangente (como alterações no ambiente Python), pode recriar o container.
+2. Apagar e recriar o container(usando imagem atualizada)
+Se você preferir uma abordagem mais limpa ou precisar de uma atualização mais abrangente(como alterações no ambiente Python), pode recriar o container.
 
 Passos:
 Atualize o código localmente e gere um novo .tar da imagem: No terminal local:
@@ -204,33 +198,47 @@ Atualize o código localmente e gere um novo .tar da imagem: No terminal local:
 bash
 Copiar código
 docker commit mosimann-streamlit-1 amosimann-streamlit-updated
-docker save -o amosimann-streamlit-updated.tar amosimann-streamlit-updated
-scp amosimann-streamlit-updated.tar mosimann@186.250.185.87:/home/mosimann/
+docker save - o amosimann-streamlit-updated.tar amosimann-streamlit-updated
+scp amosimann-streamlit-updated.tar mosimann@186.250.185.87: / home/mosimann/
 Recrie o container no servidor: No servidor:
 
 bash
 Copiar código
 docker stop mosimann-streamlit-1
 docker rm mosimann-streamlit-1
-docker load -i /home/mosimann/amosimann-streamlit-updated.tar
-docker run -d --name mosimann-streamlit-1 -p 8501:8501 amosimann-streamlit-updated
+docker load - i / home/mosimann/amosimann-streamlit-updated.tar
+docker run - d - -name mosimann-streamlit-1 - p 8501: 8501 amosimann-streamlit-updated
 
 ################################################ Docker ###########################################
+# verificar redes existentes
+docker network ls
 
-#Entrar no container Docker do PostgreSQL (no servidor host):
-docker exec -it mosimann-mosiman-database-1 bash
+# apagar rede
+docker network rm application_mosimann_network
+
+# verificar qual networks o container está usando
+docker inspect application-streamlit - -format '{{json .NetworkSettings.Networks}}'
+
+docker inspect application-database - -format '{{json .NetworkSettings.Networks}}'
+
+# testar containers estão se comunicando (ping)
+docker exec application-streamlit ping - c 4 application-database
+
+
+# Entrar no container Docker do PostgreSQL (no servidor host):
+docker exec - it mosimann-mosiman-database-1 bash
 
 Conectar ao Banco de Dados como Superusuário
-Certifique-se de estar conectado ao banco de dados com o usuário postgres (superusuário) no contêiner do PostgreSQL:
+Certifique-se de estar conectado ao banco de dados com o usuário postgres(superusuário) no contêiner do PostgreSQL:
 
 bash
 Copiar código
-docker exec -it mosimann-mosiman-database-1 psql -U postgres -d contabil
+docker exec - it mosimann-mosiman-database-1 psql - U postgres - d contabil
 
-#Acessar o PostgreSQL dentro do container:
-psql -U postgres
+# Acessar o PostgreSQL dentro do container:
+psql - U postgres
 
-#Verificar bancos disponíveis:
+# Verificar bancos disponíveis:
 \l
 
 #verificar existencia da tabela
@@ -281,6 +289,9 @@ docker stop contabil
 # apagar 
 docker rm contabil 
 
+#apagar todas as imagens
+docker rmi $(docker images -q)
+
 # rodar container com senha
 docker run -d --name mosimann-database -e POSTGRES_USER=mmss -e POSTGRES_PASSWORD=mmssmmnn -e POSTGRES_DB=contabil -p 5432:5432 postgres
 
@@ -292,6 +303,8 @@ docker exec -it mosimann-database bash
 
 # ou se quise só acessar o container
 docker exec -it mosimann-database /bin/bash
+
+docker exec -it mosimann-streamlit /bin/bash
 
 
 #Então, execute o psql:
@@ -1440,4 +1453,21 @@ exit
 Este comando sai do terminal interativo dentro do container, retornando ao terminal local.
 '''
 """
+
+############################ CONFIGURAÇÃO VS CODE ##########################F
+code ~/.config/Code/User/settings.json
+
+{
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Fira Code",
+  "workbench.startupEditor": "none",
+  "terminal.integrated.fontFamily": "FiraCode Nerd Font Mono",
+  "terminal.integrated.gpuAcceleration": "on",
+  "vsicons.dontShowNewVersionMessage": true,
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Path": "/home/jr/application/.venv/bin/autopep8",
+  "editor.formatOnSave": true
+}
 
