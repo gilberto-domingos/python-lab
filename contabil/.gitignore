@@ -76,7 +76,8 @@ dist/
 *.war
 *.ear
 
-# Ignorar arquivos específicos
+# Ignorar arquivos específicos que você pediu
 .gitattributes
 .github/
+*.tar
 
