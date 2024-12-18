@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Body Background</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Test: Change Background of Entire Page</h1>
+    <h2>Click the button to change the background of the <code>&lt;body&gt;</code> element</h2>
+
+    <button type="button" id="changeBgButton">Set Background Color</button>
+    <p id="statusMessage"></p>
+
+    <script>
+        document.getElementById('changeBgButton').addEventListener('click', function () {
+            // Altera o fundo de todo o <body>
+            document.body.style.backgroundColor = "purple";
+
+            // Exibe uma mensagem para confirmar a mudança
+            const statusMessage = document.getElementById('statusMessage');
+            statusMessage.textContent = "Background do <body> alterado para amarelo!";
+            statusMessage.style.color = "green";
+        });
+    </script>
+</body>
+
+</html>

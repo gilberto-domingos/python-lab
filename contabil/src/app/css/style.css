@@ -1,0 +1,52 @@
+#barra-superior {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: calc(100% - 140px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #262730;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    z-index: 99999 !important;
+    box-sizing: border-box;
+    margin-top: 40px;
+    transform: translateX(-50%);
+}
+
+
+.stApp {
+    z-index: 0 !important;
+    /* Garantir que o conteúdo do Streamlit não sobreponha a barra superior */
+}
+
+/* Indicador de status */
+.status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    background-color: #28a745;
+    border-radius: 50%;
+}
+
+/* Estilo das divisões dentro da barra */
+#barra-superior>div {
+    margin: 0 10px;
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 768px) {
+    #barra-superior {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #conteudo {
+        margin-top: 100px;
+        /* Ajuste para telas menores */
+    }
+}
