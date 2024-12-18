@@ -1,7 +1,5 @@
-
+# Docker
 docker-compose.override.yml
-docker-compose.yml
-Dockerfile
 .env
 .docker/
 docker-init/
@@ -77,4 +75,8 @@ dist/
 *.jar
 *.war
 *.ear
+
+# Ignorar arquivos específicos
+.gitattributes
+.github/
 
