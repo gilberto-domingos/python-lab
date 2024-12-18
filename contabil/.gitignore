@@ -1,0 +1,80 @@
+
+docker-compose.override.yml
+docker-compose.yml
+Dockerfile
+.env
+.docker/
+docker-init/
+
+# Containers e volumes do Docker
+**/node_modules/
+**/dist/
+**/build/
+
+# Arquivos de ambiente
+*.env
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*.pyd
+*.so
+*.dll
+*$py.class
+
+# Diretórios do sistema
+.DS_Store
+
+# Editor/IDE (VSCode, PyCharm)
+.vscode/
+.idea/
+
+# Arquivos de log
+*.log
+*.out
+
+# Streamlit
+.streamlit/
+.streamlit/config.toml
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ambientes virtuais
+.venv/
+env/
+venv/
+ENV/
+
+# Git
+.git
+
+# PostgreSQL
+*.sql
+pg_data/
+pgdata/
+*.dump
+pg_log/
+
+# Arquivos temporários
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Arquivos específicos do sistema
+Thumbs.db
+
+# Angular
+node_modules/
+dist/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
