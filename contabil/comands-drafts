@@ -1,5 +1,5 @@
 
-
+# ao alterar codigo , atualizar dentro do container 
 ############################################
 
 # -------------------------
@@ -217,23 +217,25 @@ docker network ls
 docker network rm application_mosimann_network
 
 # verificar qual networks o container está usando
-docker inspect application-streamlit - -format '{{json .NetworkSettings.Networks}}'
+docker inspect application-streamlit --format '{{json .NetworkSettings.Networks}}'
 
-docker inspect application-database - -format '{{json .NetworkSettings.Networks}}'
+docker inspect application-database --format '{{json .NetworkSettings.Networks}}'
 
 # testar containers estão se comunicando (ping)
-docker exec application-streamlit ping - c 4 application-database
+docker exec application-streamlit ping -c 4 application-database
+
+
+# instalar ping no container
 
 
 # Entrar no container Docker do PostgreSQL (no servidor host):
-docker exec - it mosimann-mosiman-database-1 bash
+docker exec - it application-database / bin/bash
 
 Conectar ao Banco de Dados como Superusuário
 Certifique-se de estar conectado ao banco de dados com o usuário postgres(superusuário) no contêiner do PostgreSQL:
 
-bash
-Copiar código
-docker exec - it mosimann-mosiman-database-1 psql - U postgres - d contabil
+
+docker exec - it application-database psql - U postgres - d contabil
 
 # Acessar o PostgreSQL dentro do container:
 psql - U postgres
@@ -256,7 +258,7 @@ CREATE DATABASE contabil;
 GRANT ALL PRIVILEGES ON DATABASE contabil TO mmss;
 
 
-# Testar a conexão diretamente no container:
+# Acessar banco dados :
 psql -U mmss -d contabil
 '''
 perfeito ! vamos resolver acesso no navegador primeiro, o que deseja saber escreva os comandos para você obter as informações que precisa para me dar orientaçãos para solucionar o problema, não se esqueça o projeto está rodando no servidor a partir desses containers :
