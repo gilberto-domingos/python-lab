@@ -1,4 +1,3 @@
-from models.operator_model import Operator
 import streamlit as st
 from pathlib import Path
 
@@ -9,36 +8,51 @@ def load_css(file_path):
 
 
 def show():
+    # Definir a configuração da página aqui, se necessário
+
     css_path = Path("src/app/css/operator.css")
     load_css(css_path)
 
-    st.subheader('Cadastro de operadoras')
+    st.subheader('Escolha a opção para operadoras')
 
-    options = ["Adicionar", "Consultar", "Editar", "Deletar"]
-    choice = st.selectbox("Escolha a opção:", options)
+    # Opções para o selectbox
+    options = [
+        ("Adicionar", "operator_create"),
+        ("Consultar", "operator_read"),
+        ("Editar", "operator_update"),
+        ("Deletar", "operator_delete")
+    ]
 
-    cod_operator = st.text_input("Código:")
-    cnpj_operator = st.text_input("CNPJ (somente números):", max_chars=14)
-    name_operator = st.text_input("Nome:")
+    # Obter parâmetros da URL do estado da sessão
+    query_params = st.session_state.get("query_params", {})
+    current_page = query_params.get("page", "operator_create")
 
-    if cnpj_operator:
-        if len(cnpj_operator) > 14:
-            cnpj_operator = cnpj_operator[:14]
-            st.warning("O CNPJ foi truncado para 14 dígitos.")
+    # Exibir selectbox
+    default_index = next((i for i, opt in enumerate(
+        options) if opt[1] == current_page), 0)
+    choice, selected_page = st.selectbox(
+        "Escolha a opção:",
+        options,
+        format_func=lambda x: x[0],
+        index=default_index,
+        key="operator_select_main"
+    )
 
-        if len(cnpj_operator) != 14:
-            st.error("O CNPJ deve conter exatamente 14 números.")
-        elif not cnpj_operator.isdigit():
-            st.error("Digite somente números no campo CNPJ.")
+    # Atualizar o parâmetro `page` e reiniciar
+    if current_page != selected_page:
+        st.session_state["query_params"] = {"page": selected_page}
+        st.rerun()
 
-        if st.button("Salvar"):
-            if not cod_operator or not cnpj_operator or not name_operator:
-                st.error("Todos os campos são obrigatórios.")
-            else:
-                operator_obj = Operator(
-                    cod_operator, name_operator, cnpj_operator)
-                st.success("Operadora salva com sucesso!")
-                st.write("Dados para armazenamento no banco:")
-                st.write(f"- Código: {operator_obj.cod_operator}")
-                st.write(f"- CNPJ (limpo): {operator_obj.cnpj_operator}")
-                st.write(f"- Nome: {operator_obj.name_operator}")
+    # Renderizar a página correspondente
+    if selected_page == "operator_create":
+        import src.app.views.operator_create as operator_create
+        operator_create.show()
+    elif selected_page == "operator_read":
+        import src.app.views.operator_read as operator_read
+        operator_read.show()
+    elif selected_page == "operator_update":
+        import src.app.views.operator_update as operator_update
+        operator_update.show()
+    elif selected_page == "operator_delete":
+        import src.app.views.operator_delete as operator_delete
+        operator_delete.show()
