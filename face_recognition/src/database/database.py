@@ -1,5 +1,3 @@
-# database.py
-
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
@@ -16,7 +14,7 @@ class Database:
                     dbname="contabil",
                     user="mmss",
                     password="mmssmmnn",
-                    host="application-database",
+                    host="186.250.185.87",
                     port=5432
                 )
                 print("Conexão com o banco de dados estabelecida.")

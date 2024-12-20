@@ -1,5 +1,13 @@
 import streamlit as st
 from pathlib import Path
+from src.database.operator_database import Database
+
+
+class Operator:
+    def __init__(self, cod_operator, name_operator, cnpj_operator):
+        self.cod_operator = cod_operator
+        self.name_operator = name_operator
+        self.cnpj_operator = cnpj_operator
 
 
 def load_css(file_path):
@@ -10,13 +18,17 @@ def load_css(file_path):
 def show():
     css_path = Path("src/app/css/operator_create.css")
     load_css(css_path)
-    st.title("OPERATOR CREATE")
+
+    db = Database()
+
     st.subheader('Cadastro de operadoras')
 
-    cod_operator = st.text_input("Código:")
+    # Campos de entrada para o formulário
+    cod_operator = st.text_input("Código:", max_chars=5)
     cnpj_operator = st.text_input("CNPJ (somente números):", max_chars=14)
-    name_operator = st.text_input("Nome da operadora :")
+    name_operator = st.text_input("Nome da operadora:")
 
+    # Validação do CNPJ
     if cnpj_operator:
         if len(cnpj_operator) > 14:
             cnpj_operator = cnpj_operator[:14]
@@ -27,14 +39,21 @@ def show():
         elif not cnpj_operator.isdigit():
             st.error("Digite somente números no campo CNPJ.")
 
-        if st.button("Salvar"):
-            if not cod_operator or not cnpj_operator or not name_operator:
-                st.error("Todos os campos são obrigatórios.")
-            else:
-                operator_obj = Operator(
-                    cod_operator, name_operator, cnpj_operator)
+    # Ao clicar no botão "Salvar"
+    if st.button("Salvar"):
+        if not cod_operator or not cnpj_operator or not name_operator:
+            st.error("Todos os campos são obrigatórios.")
+        else:
+            # Criar o objeto Operadora
+            operator_obj = Operator(cod_operator, name_operator, cnpj_operator)
+
+            # Inserir no banco de dados
+            try:
+                db.insert_operator(
+                    operator_obj.cod_operator,
+                    operator_obj.name_operator,
+                    operator_obj.cnpj_operator
+                )
                 st.success("Operadora salva com sucesso!")
-                st.write("Dados para armazenamento no banco:")
-                st.write(f"- Código: {operator_obj.cod_operator}")
-                st.write(f"- CNPJ (limpo): {operator_obj.cnpj_operator}")
-                st.write(f"- Nome: {operator_obj.name_operator}")
+            except Exception as e:
+                st.error(f"Erro ao salvar no banco de dados: {e}")
