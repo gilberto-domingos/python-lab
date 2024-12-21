@@ -16,7 +16,7 @@ def show():
 
     db = Database()
 
-    st.title("Operadoras - Deletar")
+    st.subheader("Operadoras - deletar")
 
     # Obtém todas as operadoras e converte para DataFrame
     try:

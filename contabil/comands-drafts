@@ -1,5 +1,14 @@
+########################## IMPLEMENTAÇÕES A FAZER ###################
+- solicitações - atendimento online em tempo real - google meet
+mensagem para cliente e explicação com link , instalar whatsapp no computado e google meet
 
-# ao alterar codigo , atualizar dentro do container 
+
+ - login por reconhecimento facial , e digital
+
+
+
+##########################
+# ansible ao alterar codigo , atualizar dentro do container 
 ############################################
 
 # -------------------------
@@ -439,7 +448,7 @@ GRANT ALL PRIVILEGES ON TABLE clients TO mmss;
 
 
 # entrar no psql do container 
-docker exec -it mosimann-database psql -U mmss -d contabil
+docker exec -it application-database psql -U mmss -d contabil
 
 CREATE TABLE clients (
     id SERIAL PRIMARY KEY,

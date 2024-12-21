@@ -48,7 +48,7 @@ class Database:
         self.conn.commit()
         return cur.fetchone()[0]
 
-    def update_client(self, client_id, name, email, phone):
+    def update_client(self, client_id,  name, email, phone):
         """Atualiza as informações de um cliente."""
         self.ensure_connection()
         cur = self.conn.cursor()

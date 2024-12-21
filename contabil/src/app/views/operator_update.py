@@ -3,11 +3,20 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.operator_database import Database
+import re
 
 
 def load_css(file_path):
     with open(file_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+def validate_cnpj(cnpj):
+    """Valida se o CNPJ tem 14 dígitos numéricos e não contém caracteres especiais."""
+    # Verifica se o CNPJ tem exatamente 14 dígitos numéricos
+    if re.match(r'^\d{14}$', cnpj):
+        return True
+    return False
 
 
 def show():
@@ -16,7 +25,7 @@ def show():
 
     db = Database()
 
-    st.title("Operadoras - Atualizar")
+    st.subheader("Operadoras - editar")
 
     # Obtém todas as operadoras e converte para DataFrame
     try:
@@ -71,15 +80,22 @@ def show():
                 if edit_option:
                     selected_operator = db.get_operator_by_cod(edit_option)
                     if selected_operator:
+                        new_cod = st.text_input(
+                            "Novo Código", value=selected_operator['cod_operator'], max_chars=5)
                         new_cnpj = st.text_input(
-                            "Novo CNPJ", value=selected_operator['cnpj_operator'])
+                            "Novo CNPJ", value=selected_operator['cnpj_operator'], max_chars=14)
                         new_name = st.text_input(
-                            "Novo Nome", value=selected_operator['name_operator'])
+                            "Novo Nome", value=selected_operator['name_operator'], max_chars=50)
 
-                        if st.button("Salvar Alterações"):
+                        # Validação do CNPJ
+                        if new_cnpj and not validate_cnpj(new_cnpj):
+                            st.error(
+                                "O CNPJ deve conter exatamente 14 números, sem caracteres especiais.")
+
+                        if st.button("Salvar Alterações") and validate_cnpj(new_cnpj):
                             try:
                                 db.update_operator(
-                                    selected_operator['id'], edit_option, new_cnpj, new_name)
+                                    selected_operator['id'], new_cod, new_cnpj, new_name)
                                 st.success("Operadora atualizada com sucesso!")
                             except Exception as e:
                                 st.error(f"Erro ao atualizar operadora: {e}")
@@ -133,7 +149,12 @@ def show():
                         new_name = st.text_input(
                             "Novo Nome", value=selected_operator[0]['name_operator'])
 
-                        if st.button("Salvar Alterações"):
+                        # Validação do CNPJ
+                        if new_cnpj and not validate_cnpj(new_cnpj):
+                            st.error(
+                                "O CNPJ deve conter exatamente 14 números, sem caracteres especiais.")
+
+                        if st.button("Salvar Alterações") and validate_cnpj(new_cnpj):
                             try:
                                 db.update_operator(
                                     selected_operator[0]['id'], selected_operator[0]['cod_operator'], new_cnpj, new_name)
