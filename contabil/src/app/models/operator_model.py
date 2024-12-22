@@ -1,8 +1,12 @@
+import re
+
+
 class Operator:
-    def __init__(self, cod_operator, cnpj_operator, name_operator):
+    def __init__(self, cod_operator, cnpj_operator, name_operator, operator_id=None):
         self.cod_operator = cod_operator
         self.cnpj_operator = cnpj_operator
         self.name_operator = name_operator
+        self.operator_id = operator_id
 
     def get_cod_operator(self):
         return self.cod_operator
@@ -25,3 +29,7 @@ class Operator:
     def display_info(self):
         print(f"Código: {self.cod_operator}, CNPJ: {
               self.cnpj_operator}, Nome: {self.name_operator}")
+
+    def validate_cnpj(self):
+        """Valida se o CNPJ tem 14 dígitos numéricos e não contém caracteres especiais."""
+        return bool(re.match(r'^\d{14}$', self.cnpj_operator))
