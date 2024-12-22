@@ -1,14 +1,8 @@
 import streamlit as st
 from pathlib import Path
 from src.database.operator_database import Database
+from src.app.models.operator_model import Operator
 import re
-
-
-class Operator:
-    def __init__(self, cod_operator, name_operator, cnpj_operator):
-        self.cod_operator = cod_operator
-        self.name_operator = name_operator
-        self.cnpj_operator = cnpj_operator
 
 
 def load_css(file_path):
@@ -18,7 +12,6 @@ def load_css(file_path):
 
 def validate_cnpj(cnpj):
     """Valida se o CNPJ tem 14 dígitos numéricos e não contém caracteres especiais."""
-    # Verifica se o CNPJ tem exatamente 14 dígitos numéricos
     if re.match(r'^\d{14}$', cnpj):
         return True
     return False
@@ -32,12 +25,10 @@ def show():
 
     st.subheader('Cadastro de operadoras')
 
-    # Campos de entrada para o formulário
     cod_operator = st.text_input("Código:", max_chars=5)
     cnpj_operator = st.text_input("CNPJ (somente números):", max_chars=14)
     name_operator = st.text_input("Nome da operadora:")
 
-    # Validação do CNPJ
     cnpj_valid = True
     if cnpj_operator:
         if len(cnpj_operator) > 14:
@@ -55,22 +46,20 @@ def show():
                 "O CNPJ deve conter exatamente 14 números, sem caracteres especiais.")
             cnpj_valid = False
 
-    # Ao clicar no botão "Salvar"
     if st.button("Salvar"):
         if not cod_operator or not cnpj_operator or not name_operator:
             st.error("Todos os campos são obrigatórios.")
         elif not cnpj_valid:
             st.error("Corrija os erros no CNPJ antes de salvar.")
         else:
-            # Criar o objeto Operadora
-            operator_obj = Operator(cod_operator, name_operator, cnpj_operator)
+            # Criar o objeto Operadora usando o modelo importado
+            operator_obj = Operator(cod_operator, cnpj_operator, name_operator)
 
-            # Inserir no banco de dados
             try:
                 db.insert_operator(
-                    operator_obj.cod_operator,
-                    operator_obj.name_operator,
-                    operator_obj.cnpj_operator
+                    operator_obj.get_cod_operator(),
+                    operator_obj.get_name_operator(),
+                    operator_obj.get_cnpj_operator()
                 )
                 st.success("Operadora salva com sucesso!")
             except Exception as e:
