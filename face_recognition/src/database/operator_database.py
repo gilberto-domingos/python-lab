@@ -17,9 +17,10 @@ class Database:
                     host="186.250.185.87",
                     port=5432
                 )
+                print("Conexão com o banco de dados estabelecida.")
             except psycopg2.Error as e:
                 self.conn = None
-                print(f"Erro ao conectar ao banco de dados: {e}")
+                raise Exception(f"Erro ao conectar ao banco de dados: {e}")
 
     def ensure_connection(self):
         """Garante que a conexão está ativa, tentando reconectar se necessário."""
