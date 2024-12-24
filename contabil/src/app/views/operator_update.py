@@ -4,6 +4,8 @@ from pathlib import Path
 from st_keyup import st_keyup
 from src.database.operator_database import Database
 from src.app.models.operator_model import Operator
+# Importações adicionadas
+from src.app.utils.validate import validate_cod, validate_cnpj
 
 
 class OperatorEditor:
@@ -32,11 +34,19 @@ class OperatorEditor:
         new_name = st.text_input(
             "Novo Nome", value=operator.get_name_operator(), max_chars=50)
 
-        if new_cnpj and not operator.validate_cnpj():
-            st.error(
-                "O CNPJ deve conter exatamente 14 números, sem caracteres especiais.")
+        # Validação do Código
+        cod_valid = True
+        if new_cod and not validate_cod(new_cod):
+            st.error("O Código deve conter exatamente 5 números.")
+            cod_valid = False
 
-        if st.button("Salvar Alterações") and operator.validate_cnpj():
+        # Validação do CNPJ
+        cnpj_valid = True
+        if new_cnpj and not validate_cnpj(new_cnpj):
+            st.error("O CNPJ deve conter exatamente 14 números.")
+            cnpj_valid = False
+
+        if st.button("Salvar Alterações") and cod_valid and cnpj_valid:
             try:
                 self.db.update_operator(
                     operator.operator_id, new_cod, new_cnpj, new_name)
