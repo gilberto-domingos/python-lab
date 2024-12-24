@@ -10,7 +10,7 @@ if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
 try:
-    from src.database.database import Database
+    from src.database.client_database import Database
 except ImportError as e:
     print(f"Error importing database module: {e}")
     print(f"sys.path: {sys.path}")

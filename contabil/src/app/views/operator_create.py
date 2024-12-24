@@ -2,19 +2,13 @@ import streamlit as st
 from pathlib import Path
 from src.database.operator_database import Database
 from src.app.models.operator_model import Operator
-import re
+from src.app.utils.validate import validate_cod
+from src.app.utils.validate import validate_cnpj
 
 
 def load_css(file_path):
     with open(file_path) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-
-def validate_cnpj(cnpj):
-    """Valida se o CNPJ tem 14 dígitos numéricos e não contém caracteres especiais."""
-    if re.match(r'^\d{14}$', cnpj):
-        return True
-    return False
 
 
 def show():
@@ -29,12 +23,21 @@ def show():
     cnpj_operator = st.text_input("CNPJ (somente números):", max_chars=14)
     name_operator = st.text_input("Nome da operadora:")
 
+    cod_valid = True
+    if cod_operator:
+        if len(cod_operator) != 5:
+            st.error("O Código deve conter exatamente 5 números.")
+            cod_valid = False
+        elif not cod_operator.isdigit():
+            st.error("Digite somente números no campo Código.")
+            cod_valid = False
+        elif not validate_cod(cod_operator):
+            st.error(
+                "O Código deve conter exatamente 5 números, sem caracteres especiais.")
+            cod_valid = False
+
     cnpj_valid = True
     if cnpj_operator:
-        if len(cnpj_operator) > 14:
-            cnpj_operator = cnpj_operator[:14]
-            st.warning("O CNPJ foi truncado para 14 dígitos.")
-
         if len(cnpj_operator) != 14:
             st.error("O CNPJ deve conter exatamente 14 números.")
             cnpj_valid = False
@@ -49,17 +52,15 @@ def show():
     if st.button("Salvar"):
         if not cod_operator or not cnpj_operator or not name_operator:
             st.error("Todos os campos são obrigatórios.")
-        elif not cnpj_valid:
-            st.error("Corrija os erros no CNPJ antes de salvar.")
+        elif not cod_valid:
+            st.error("Corrija os erros no Código ou CNPJ antes de salvar.")
         else:
-            # Criar o objeto Operadora usando o modelo importado
             operator_obj = Operator(cod_operator, cnpj_operator, name_operator)
-
             try:
                 db.insert_operator(
                     operator_obj.get_cod_operator(),
-                    operator_obj.get_name_operator(),
-                    operator_obj.get_cnpj_operator()
+                    operator_obj.get_cnpj_operator(),
+                    operator_obj.get_name_operator()
                 )
                 st.success("Operadora salva com sucesso!")
             except Exception as e:
