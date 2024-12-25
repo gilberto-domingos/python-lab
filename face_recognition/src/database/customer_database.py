@@ -14,7 +14,7 @@ class Database:
                     dbname="contabil",
                     user="mmss",
                     password="mmssmmnn",
-                    host="186.250.185.87",  # mudar antes de enviar para servidor
+                    host="186.250.185.87",
                     port=5432
                 )
                 print("Conexão com o banco de dados estabelecida.")
@@ -30,108 +30,108 @@ class Database:
             raise Exception(
                 "Falha ao estabelecer conexão com o banco de dados.")
 
-    def insert_operator(self, cod_operator, cnpj_operator, name_operator):
-        """Insere uma nova operadora no banco de dados."""
+    def insert_customer(self, cod_customer, name_customer, cell_customer, email_customer, phone_customer):
+        """Insere um novo cliente no banco de dados."""
         self.ensure_connection()
         cur = self.conn.cursor()
         try:
             cur.execute(
                 """
-                INSERT INTO operadoras (cod_operator, cnpj_operator, name_operator)
-                VALUES (%s, %s, %s)
+                INSERT INTO customers (cod_customer, name_customer, cell_customer, email_customer, phone_customer)
+                VALUES (%s, %s, %s, %s, %s)
                 RETURNING id;
                 """,
-                (cod_operator, cnpj_operator, name_operator)
+                (cod_customer, name_customer, cell_customer,
+                 email_customer, phone_customer)
             )
             self.conn.commit()
-            return cur.fetchone()[0]  # Retorna o ID da operadora inserida
+            return cur.fetchone()[0]  # Retorna o ID do cliente inserido
         except psycopg2.Error as e:
             self.conn.rollback()
             raise Exception(f"Erro ao salvar no banco de dados: {e}")
 
-    def get_operator(self, operator_id):
-        """Obtém uma operadora pelo ID."""
+    def get_customer(self, customer_id):
+        """Obtém um cliente pelo ID."""
         self.ensure_connection()
         cur = self.conn.cursor(cursor_factory=RealDictCursor)
         try:
             cur.execute(
-                "SELECT * FROM operadoras WHERE id = %s",
-                (operator_id,)
+                "SELECT * FROM customers WHERE id = %s",
+                (customer_id,)
             )
-            return cur.fetchone()  # Retorna os dados da operadora ou None
+            return cur.fetchone()  # Retorna os dados do cliente ou None
         except psycopg2.Error as e:
-            raise Exception(f"Erro ao buscar operadora no banco de dados: {e}")
+            raise Exception(f"Erro ao buscar cliente no banco de dados: {e}")
 
-    def update_operator(self, operator_id, cod_operator, cnpj_operator, name_operator):
-        """Atualiza os dados de uma operadora."""
+    def update_customer(self, customer_id, cod_customer, name_customer, cell_customer, email_customer, phone_customer):
+        """Atualiza os dados de um cliente."""
         self.ensure_connection()
         cur = self.conn.cursor()
         try:
             cur.execute(
                 """
-                UPDATE operadoras
-                SET cod_operator = %s, cnpj_operator = %s, name_operator = %s
+                UPDATE customers
+                SET cod_customer = %s, name_customer = %s, cell_customer = %s, email_customer = %s, phone_customer = %s
                 WHERE id = %s;
                 """,
-                (cod_operator, cnpj_operator, name_operator, operator_id)
+                (cod_customer, name_customer, cell_customer,
+                 email_customer, phone_customer, customer_id)
             )
             self.conn.commit()
             return cur.rowcount  # Retorna o número de linhas afetadas
         except psycopg2.Error as e:
             self.conn.rollback()
             raise Exception(
-                f"Erro ao atualizar operadora no banco de dados: {e}")
+                f"Erro ao atualizar cliente no banco de dados: {e}")
 
-    def delete_operator(self, operator_id):
-        """Exclui uma operadora pelo ID."""
+    def delete_customer(self, customer_id):
+        """Exclui um cliente pelo ID."""
         self.ensure_connection()
         cur = self.conn.cursor()
         try:
             cur.execute(
-                "DELETE FROM operadoras WHERE id = %s",
-                (operator_id,)
+                "DELETE FROM customers WHERE id = %s",
+                (customer_id,)
             )
             self.conn.commit()
             return cur.rowcount  # Retorna o número de linhas afetadas
         except psycopg2.Error as e:
             self.conn.rollback()
-            raise Exception(
-                f"Erro ao excluir operadora no banco de dados: {e}")
+            raise Exception(f"Erro ao excluir cliente no banco de dados: {e}")
 
-    def get_all_operators(self):
-        """Obtém todas as operadoras do banco de dados."""
+    def get_all_customers(self):
+        """Obtém todos os customers do banco de dados."""
         self.ensure_connection()
         cur = self.conn.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("SELECT * FROM operadoras")
-            return cur.fetchall()  # Retorna todas as operadoras
+            cur.execute("SELECT * FROM customers")
+            return cur.fetchall()  # Retorna todos os customers
         except psycopg2.Error as e:
             raise Exception(
-                f"Erro ao buscar todas as operadoras no banco de dados: {e}")
+                f"Erro ao buscar todos os customers no banco de dados: {e}")
 
-    def get_operator_by_cod(self, cod_operator):
-        """Obtém uma operadora pelo código."""
+    def get_customer_by_cod(self, cod_customer):
+        """Obtém um cliente pelo código."""
         self.ensure_connection()
         cur = self.conn.cursor(cursor_factory=RealDictCursor)
         try:
             cur.execute(
-                "SELECT * FROM operadoras WHERE cod_operator = %s",
-                (cod_operator,)
+                "SELECT * FROM customers WHERE cod_customer = %s",
+                (cod_customer,)
             )
-            return cur.fetchone()  # Retorna os dados da operadora ou None
+            return cur.fetchone()  # Retorna os dados do cliente ou None
         except psycopg2.Error as e:
-            raise Exception(f"Erro ao buscar operadora pelo código: {e}")
+            raise Exception(f"Erro ao buscar cliente pelo código: {e}")
 
-    def get_operator_by_name(self, name_operator):
-        """Obtém operadoras pelo nome (parcial)."""
+    def get_customer_by_name(self, name_customer):
+        """Obtém customers pelo nome (parcial)."""
         self.ensure_connection()
         cur = self.conn.cursor(cursor_factory=RealDictCursor)
         try:
             cur.execute(
-                "SELECT * FROM operadoras WHERE name_operator ILIKE %s",
-                # Usa LIKE para buscar nomes semelhantes
-                (f"%{name_operator}%",)
+                "SELECT * FROM customers WHERE name_customer ILIKE %s",
+                (f"%{name_customer}%",)
             )
-            return cur.fetchall()  # Retorna todas as operadoras encontradas
+            return cur.fetchall()  # Retorna todos os customers encontrados
         except psycopg2.Error as e:
-            raise Exception(f"Erro ao buscar operadoras pelo nome: {e}")
+            raise Exception(f"Erro ao buscar customers pelo nome: {e}")

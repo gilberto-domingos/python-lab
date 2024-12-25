@@ -513,7 +513,7 @@ try:
         dbname="contabil",
         user="mmss",
         password="mmssmmnn",
-        host="mosimann-database",
+        host="application-database",
         port="5432"
     )
     print("Conexão bem-sucedida!")
