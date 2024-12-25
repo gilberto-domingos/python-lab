@@ -2,8 +2,7 @@ import streamlit as st
 from pathlib import Path
 from src.database.operator_database import Database
 from src.app.models.operator_model import Operator
-from src.app.utils.validate import validate_cod
-from src.app.utils.validate import validate_cnpj
+from src.app.utils.validate import validate_cod, validate_cnpj
 
 
 def load_css(file_path):
@@ -19,9 +18,9 @@ def show():
 
     st.subheader('Cadastro de operadoras')
 
-    cod_operator = st.text_input("Código:", max_chars=5)
-    cnpj_operator = st.text_input("CNPJ (somente números):", max_chars=14)
-    name_operator = st.text_input("Nome da operadora:")
+    cod_operator = st.text_input("Código :", max_chars=5)
+    cnpj_operator = st.text_input("CNPJ :", max_chars=20)
+    name_operator = st.text_input("Nome da operadora :")
 
     cod_valid = True
     if cod_operator:
@@ -38,21 +37,14 @@ def show():
 
     cnpj_valid = True
     if cnpj_operator:
-        if len(cnpj_operator) != 14:
-            st.error("O CNPJ deve conter exatamente 14 números.")
-            cnpj_valid = False
-        elif not cnpj_operator.isdigit():
-            st.error("Digite somente números no campo CNPJ.")
-            cnpj_valid = False
-        elif not validate_cnpj(cnpj_operator):
-            st.error(
-                "O CNPJ deve conter exatamente 14 números, sem caracteres especiais.")
+        if not validate_cnpj(cnpj_operator):
+            st.error("O CNPJ informado é inválido.")
             cnpj_valid = False
 
     if st.button("Salvar"):
         if not cod_operator or not cnpj_operator or not name_operator:
             st.error("Todos os campos são obrigatórios.")
-        elif not cod_valid:
+        elif not cod_valid or not cnpj_valid:
             st.error("Corrija os erros no Código ou CNPJ antes de salvar.")
         else:
             operator_obj = Operator(cod_operator, cnpj_operator, name_operator)

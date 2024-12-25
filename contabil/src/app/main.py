@@ -152,8 +152,8 @@ elif selected == "Cadastro":
         operator.show()
 
     if cadastro_menu == "Cliente":
-        from src.app.views import customers
-        customers.show()
+        from src.app.views import customer
+        customer.show()
 
     elif cadastro_menu == "Célula":
         from src.app.views import cell
