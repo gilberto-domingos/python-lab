@@ -76,4 +76,4 @@ def show():
         st.write("Exibindo todas as empresas.")
 
     # Exibição do DataFrame
-    st.dataframe(df_filtrado, use_container_width=True)
+    st.dataframe(df_filtrado, hide_index=True, use_container_width=True)
