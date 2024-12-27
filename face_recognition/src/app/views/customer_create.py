@@ -2,7 +2,7 @@ import streamlit as st
 from pathlib import Path
 from src.database.customer_database import Database
 from src.app.models.customer_model import Customer
-from src.app.utils.validate import validate_cod, validate_email_address
+from src.app.utils.validate import validate_cod, validate_email_address, validate_brazilian_phone
 
 
 def load_css(file_path):
@@ -26,6 +26,7 @@ def show():
 
     cod_valid = True
     email_valid = True
+    phone_valid = True
 
     if cod_customer:
         if len(cod_customer) != 5:
@@ -50,9 +51,19 @@ def show():
             st.error("O campo de e-mail está vazio.")
             email_valid = False
 
+        if phone_customer:
+            phone_validation_result, phone_data = validate_brazilian_phone(
+                phone_customer)
+            if not phone_validation_result:
+                st.error(f"Telefone inválido: {phone_data}")
+                phone_valid = False
+        else:
+            st.error("O campo de telefone está vazio.")
+            phone_valid = False
+
         if not cod_customer or not name_customer or not cell_customer or not email_customer or not phone_customer:
             st.error("Todos os campos são obrigatórios.")
-        elif not cod_valid or not email_valid:
+        elif not cod_valid or not email_valid or not phone_valid:
             st.error("Corrija os erros antes de salvar.")
         else:
             customer_obj = Customer(

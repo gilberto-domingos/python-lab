@@ -172,8 +172,8 @@ elif selected == "Cadastro":
         tax_regime.show()
 
 elif selected == "Empresas":
-    from src.app.views import crud
-    crud.show()
+    from src.app.views import companies
+    companies.show()
 
 elif selected == "Solicitações":
     from src.app.views import request
