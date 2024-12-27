@@ -87,7 +87,6 @@ with st.sidebar:
             "Solicitações",
             "Método APLA",
             "Dashboards",
-            "Relatórios",
             "Imagens",
             "CSV"
         ],
@@ -96,9 +95,8 @@ with st.sidebar:
             "list-check",
             "building",
             "chat",
-            "building",
-            "list-check",
             "file-earmark-text",
+            "list-check",
             "clipboard-check",
             "book",
             # "bar-chart",
@@ -186,11 +184,6 @@ elif selected == "Método APLA":
 elif selected == "Dashboards":
     from src.app.views import dashboards
     dashboards.show()
-
-elif selected == "Relatórios":
-    st.title("Relatórios")
-    from src.app.views import report
-    report.show()
 
 elif selected == "Imagens":
     from src.app.views import img
