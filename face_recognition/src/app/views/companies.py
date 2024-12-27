@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import pandas as pd
+import random
 
 
 def show():
@@ -24,8 +25,25 @@ def show():
             table['Telefone'] = table['Telefone'].apply(
                 lambda x: str(int(x)) if pd.notnull(x) else '')
 
-        # Exibe a tabela no Streamlit sem índice
-        st.dataframe(table.reset_index(drop=True))
+        # Exibe a tabela no Streamlit com a configuração de coluna personalizada e sem índice
+        st.dataframe(
+            table,
+            column_config={
+                "name": st.column_config.TextColumn("Nome da Empresa"),
+                "url": st.column_config.LinkColumn("URL da Empresa"),
+                "stars": st.column_config.NumberColumn(
+                    "Estrelas do GitHub",
+                    help="Número de estrelas no GitHub",
+                    format="%d ⭐",
+                ),
+                "views_history": st.column_config.LineChartColumn(
+                    "Visualizações (últimos 30 dias)", y_min=0, y_max=5000
+                ),
+            },
+            hide_index=True,
+            use_container_width=True
+        )
+
     except FileNotFoundError:
         st.error(f"O arquivo {file_path} não foi encontrado.")
     except Exception as e:
