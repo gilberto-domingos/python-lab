@@ -4,7 +4,6 @@ from pathlib import Path
 from st_keyup import st_keyup
 from src.database.operator_database import Database
 from src.app.models.operator_model import Operator
-# Importações adicionadas
 from src.app.utils.validate import validate_cod, validate_cnpj
 
 
@@ -31,25 +30,30 @@ class OperatorEditor:
             "Novo Código", value=operator.get_cod_operator(), max_chars=5)
         new_cnpj = st.text_input(
             "Novo CNPJ", value=operator.get_cnpj_operator(), max_chars=14)
+
         new_name = st.text_input(
             "Novo Nome", value=operator.get_name_operator(), max_chars=50)
 
-        # Validação do Código
         cod_valid = True
         if new_cod and not validate_cod(new_cod):
             st.error("O Código deve conter exatamente 5 números.")
             cod_valid = False
 
-        # Validação do CNPJ
         cnpj_valid = True
-        if new_cnpj and not validate_cnpj(new_cnpj):
+        if new_cnpj and not new_cnpj.isdigit():
+            st.error("O CNPJ deve conter apenas números.")
+            cnpj_valid = False
+        elif new_cnpj and len(new_cnpj) == 14 and not validate_cnpj(new_cnpj):
+            st.error("CNPJ inválido.")
+            cnpj_valid = False
+        elif new_cnpj and len(new_cnpj) != 14:
             st.error("O CNPJ deve conter exatamente 14 números.")
             cnpj_valid = False
 
         if st.button("Salvar Alterações") and cod_valid and cnpj_valid:
             try:
                 self.db.update_operator(
-                    operator.operator_id, new_cod, new_cnpj, new_name)
+                    operator.id, new_cod, new_cnpj, new_name)
                 st.success("Operadora atualizada com sucesso!")
                 return new_cod, new_cnpj, new_name
             except Exception as e:
@@ -67,7 +71,10 @@ def show():
 
     try:
         all_operators = editor.db.get_all_operators()
-        df_operators = pd.DataFrame(all_operators).drop(columns=["id"])
+        df_operators = pd.DataFrame(all_operators)
+        if 'id' in df_operators.columns:
+            df_operators = df_operators.drop(columns=["id"])
+
         df_operators.rename(columns={
             "cod_operator": "Código",
             "cnpj_operator": "CNPJ",
@@ -105,25 +112,32 @@ def show():
                 st.warning("Nenhuma operadora encontrada com esse nome.")
         st.session_state['filtered_operators'] = filtered_operators
 
-    # Exibe a tabela e a opção de edição
+    # Exibe a tabela e permite a edição ao clicar diretamente na tabela
     if not filtered_operators.empty:
         editor.show_operator_table(filtered_operators)
-        edit_option = st.selectbox(
-            "Escolha a operadora para editar", filtered_operators['Código'].tolist())
-        if edit_option:
-            selected_operator = editor.db.get_operator_by_cod(edit_option)
-            operator = Operator(selected_operator['cod_operator'], selected_operator['cnpj_operator'],
-                                selected_operator['name_operator'], selected_operator['id'])
-            updated_values = editor.edit_operator(operator)
 
-            if updated_values:
-                # Atualiza a linha da tabela diretamente com os novos dados
-                filtered_operators.loc[filtered_operators['Código'] == edit_option, [
-                    'CNPJ', 'Nome']] = updated_values[1], updated_values[2]
-                # Atualiza o estado com os dados modificados
-                st.session_state['filtered_operators'] = filtered_operators
-                # Reexibe a tabela com os dados atualizados
-                editor.show_operator_table(filtered_operators)
+        # Seleciona automaticamente a primeira operadora e realiza a edição
+        selected_operator_data = filtered_operators.iloc[0]
+        selected_operator = editor.db.get_operator_by_cod(
+            selected_operator_data['Código'])
+
+        operator = Operator(
+            selected_operator['cod_operator'],
+            selected_operator['cnpj_operator'],
+            selected_operator['name_operator'],
+            selected_operator['id']
+        )
+
+        updated_values = editor.edit_operator(operator)
+
+        if updated_values:
+            # Atualiza a linha da tabela diretamente com os novos dados
+            filtered_operators.loc[filtered_operators['Código'] == selected_operator_data['Código'], [
+                'CNPJ', 'Nome']] = updated_values[1], updated_values[2]
+            # Atualiza o estado com os dados modificados
+            st.session_state['filtered_operators'] = filtered_operators
+            # Reexibe a tabela com os dados atualizados
+            editor.show_operator_table(filtered_operators)
 
 
 if __name__ == "__main__":

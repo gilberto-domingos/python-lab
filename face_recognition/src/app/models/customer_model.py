@@ -2,8 +2,8 @@ import re
 
 
 class Customer:
-    def __init__(self, cod_customer, cell_customer, name_customer, email_customer, phone_customer, id_customer=None):
-        self.id_customer = id_customer
+    def __init__(self, cod_customer, cell_customer, name_customer, email_customer, phone_customer, id=None):
+        self.id = id
         self.cod_customer = cod_customer
         self.name_customer = name_customer
         self.cell_customer = cell_customer
@@ -43,7 +43,7 @@ class Customer:
     def display_info(self):
         print(f"Código: {self.cod_customer}, "
               f"Nome: {self.name_customer}, "
-              f"Celular: {self.cell_customer}, "
+              f"Célula: {self.cell_customer}, "
               f"Email: {self.email_customer}, "
               f"Telefone: {self.phone_customer}, "
-              f"ID: {self.id_customer}")
+              f"ID: {self.id}")

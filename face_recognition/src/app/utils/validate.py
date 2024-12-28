@@ -11,12 +11,6 @@ def validate_cod(cod):
     return False
 
 
-def validate_phone_customer(phone_customer):
-    if re.match(r'^\d{1,11}$', phone_customer):
-        return True
-    return False
-
-
 def validate_email_address(email_customer):
     try:
         valid = validate_email(email_customer)
