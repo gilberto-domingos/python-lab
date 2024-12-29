@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.customer_database import Database
+from src.app.models.customer_model import Customer  # Importando o modelo Customer
 
 
 class CustomerReader:
@@ -16,15 +17,24 @@ class CustomerReader:
     def get_customer_data(self):
         try:
             all_customers = self.db.get_all_customers()
-            df_customers = pd.DataFrame(
-                all_customers).drop(columns=["id"])
-            df_customers.rename(columns={
-                "cod_customer": "Código",
-                "name_customer": "Nome",
-                "cell_customer": "Célula",
-                "email_customer": "Email",
-                "phone_customer": "Telefone"
-            }, inplace=True)
+            # Convertendo os dados de dicionário para instâncias da classe Customer
+            customers = [Customer(
+                customer['cod_customer'],
+                customer['name_customer'],
+                customer['cell_customer'],
+                customer['email_customer'],
+                customer['phone_customer']
+            ) for customer in all_customers]
+
+            # Criando um DataFrame para exibição
+            df_customers = pd.DataFrame([{
+                'Código': cust.cod_customer,
+                'Nome': cust.name_customer,
+                'Célula': cust.cell_customer,
+                'Email': cust.email_customer,
+                'Telefone': cust.phone_customer
+            } for cust in customers])
+
             return df_customers
         except Exception as e:
             st.error(f"Erro ao buscar clientes: {e}")

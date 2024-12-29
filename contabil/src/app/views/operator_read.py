@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.operator_database import Database
+from src.app.models.operator_model import Operator  # Importando o modelo Operator
 
 
 class OperatorReader:
@@ -16,12 +17,20 @@ class OperatorReader:
     def get_operator_data(self):
         try:
             all_operators = self.db.get_all_operators()
-            df_operators = pd.DataFrame(all_operators).drop(columns=["id"])
-            df_operators.rename(columns={
-                "cod_operator": "Código",
-                "cnpj_operator": "CNPJ",
-                "name_operator": "Nome"
-            }, inplace=True)
+            # Convertendo os dados de dicionário para instâncias da classe Operator
+            operators = [Operator(
+                operator['cod_operator'],
+                operator['cnpj_operator'],
+                operator['name_operator']
+            ) for operator in all_operators]
+
+            # Criando um DataFrame para exibição
+            df_operators = pd.DataFrame([{
+                'Código': operator.cod_operator,
+                'CNPJ': operator.cnpj_operator,
+                'Nome': operator.name_operator
+            } for operator in operators])
+
             return df_operators
         except Exception as e:
             st.error(f"Erro ao buscar operadoras: {e}")
@@ -54,7 +63,7 @@ def show():
     reader = OperatorReader(db)
     reader.load_css(css_path)
 
-    st.subheader("Operadoras - consultar")
+    st.subheader("Operadoras - Consultar")
 
     df_operators = reader.get_operator_data()
     if df_operators.empty:

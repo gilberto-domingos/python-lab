@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.cell_database import Database
+from src.app.models.cell_model import Cell  # Importando o modelo Cell
 
 
 class CellReader:
@@ -16,12 +17,20 @@ class CellReader:
     def get_cell_data(self):
         try:
             all_cells = self.db.get_all_cells()
-            df_cells = pd.DataFrame(all_cells).drop(columns=["id"])
-            df_cells.rename(columns={
-                "cod_cell": "Código",
-                "name_cell": "Nome",
-                "email_cell": "Email"
-            }, inplace=True)
+            # Convertendo os dados de dicionário para instâncias da classe Cell
+            cells = [Cell(
+                cell['cod_cell'],
+                cell['name_cell'],
+                cell['email_cell']
+            ) for cell in all_cells]
+
+            # Criando um DataFrame para exibição
+            df_cells = pd.DataFrame([{
+                'Código': cell.cod_cell,
+                'Nome': cell.name_cell,
+                'Email': cell.email_cell
+            } for cell in cells])
+
             return df_cells
         except Exception as e:
             st.error(f"Erro ao buscar células: {e}")
