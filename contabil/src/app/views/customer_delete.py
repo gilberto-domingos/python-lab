@@ -90,7 +90,7 @@ def show():
 
     df_customers = deleter.get_customer_data()
     if df_customers.empty:
-        return  # Caso não haja dados para exibir, retornamos
+        return
 
     filter_option = st.selectbox(
         "Escolha a forma de filtragem:", ("por Código", "por Nome"))
