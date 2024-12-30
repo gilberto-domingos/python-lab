@@ -33,13 +33,11 @@ class CellEditor:
         new_email = st.text_input(
             "Novo Email", value=cell.get_email_cell(), max_chars=50)
 
-        # Validação do Código
         cod_valid = True
         if new_cod and not validate_cod(new_cod):
             st.error("O Código deve conter exatamente 5 números.")
             cod_valid = False
 
-        # Validação do Email
         email_valid = True
         if new_email and not validate_email_address(new_email):
             st.error("Email inválido.")
@@ -105,11 +103,9 @@ def show():
                 st.warning("Nenhuma célula encontrada com esse nome.")
         st.session_state['filtered_cells'] = filtered_cells
 
-    # Exibe a tabela e a opção de edição
     if not filtered_cells.empty:
         editor.show_cell_table(filtered_cells)
 
-        # Seleciona a primeira célula automaticamente
         selected_cell_data = filtered_cells.iloc[0]
         selected_cell = editor.db.get_cell_by_cod(
             selected_cell_data['Código'])
@@ -122,12 +118,9 @@ def show():
         updated_values = editor.edit_cell(cell)
 
         if updated_values:
-            # Atualiza a linha da tabela diretamente com os novos dados
             filtered_cells.loc[filtered_cells['Código'] == selected_cell_data['Código'], [
                 'Nome', 'Email']] = updated_values[1], updated_values[2]
-            # Atualiza o estado com os dados modificados
             st.session_state['filtered_cells'] = filtered_cells
-            # Reexibe a tabela com os dados atualizados
             editor.show_cell_table(filtered_cells)
 
 

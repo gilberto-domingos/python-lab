@@ -18,7 +18,6 @@ def show():
 
     st.subheader('Cadastro de Funcionários')
 
-    # Campos de entrada do formulário
     cod_employee = st.text_input("Código :", max_chars=5)
     name_employee = st.text_input("Nome do Funcionário :")
     email_employee = st.text_input("Email:")

@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.cell_database import Database
-from src.app.models.cell_model import Cell  # Importando o modelo Cell
+from src.app.models.cell_model import Cell
 
 
 class CellReader:
@@ -17,14 +17,12 @@ class CellReader:
     def get_cell_data(self):
         try:
             all_cells = self.db.get_all_cells()
-            # Convertendo os dados de dicionário para instâncias da classe Cell
             cells = [Cell(
                 cell['cod_cell'],
                 cell['name_cell'],
                 cell['email_cell']
             ) for cell in all_cells]
 
-            # Criando um DataFrame para exibição
             df_cells = pd.DataFrame([{
                 'Código': cell.cod_cell,
                 'Nome': cell.name_cell,
@@ -34,7 +32,7 @@ class CellReader:
             return df_cells
         except Exception as e:
             st.error(f"Erro ao buscar células: {e}")
-            return pd.DataFrame()  # Retorna um DataFrame vazio em caso de erro
+            return pd.DataFrame()
 
     def show_cell_table(self, df_cells):
         s1 = dict(selector='th', props=[('text-align', 'center')])
@@ -67,7 +65,7 @@ def show():
 
     df_cells = reader.get_cell_data()
     if df_cells.empty:
-        return  # Caso não haja dados para exibir, retornamos
+        return
 
     filter_option = st.selectbox(
         "Escolha a forma de filtragem:", ("por Código", "por Nome"))

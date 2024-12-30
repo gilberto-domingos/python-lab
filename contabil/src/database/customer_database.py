@@ -50,20 +50,20 @@ class Database:
             self.conn.rollback()
             raise Exception(f"Erro ao salvar no banco de dados: {e}")
 
-    def get_customer(self, customer_id):
+    def get_customer(self, id):
         """Obtém um cliente pelo ID."""
         self.ensure_connection()
         cur = self.conn.cursor(cursor_factory=RealDictCursor)
         try:
             cur.execute(
                 "SELECT * FROM customers WHERE id = %s",
-                (customer_id,)
+                (id,)
             )
             return cur.fetchone()  # Retorna os dados do cliente ou None
         except psycopg2.Error as e:
             raise Exception(f"Erro ao buscar cliente no banco de dados: {e}")
 
-    def update_customer(self, customer_id, cod_customer, name_customer, cell_customer, email_customer, phone_customer):
+    def update_customer(self, id, cod_customer, name_customer, cell_customer, email_customer, phone_customer):
         """Atualiza os dados de um cliente."""
         self.ensure_connection()
         cur = self.conn.cursor()
@@ -75,7 +75,7 @@ class Database:
                 WHERE id = %s;
                 """,
                 (cod_customer, name_customer, cell_customer,
-                 email_customer, phone_customer, customer_id)
+                 email_customer, phone_customer, id)
             )
             self.conn.commit()
             return cur.rowcount  # Retorna o número de linhas afetadas
@@ -84,14 +84,14 @@ class Database:
             raise Exception(
                 f"Erro ao atualizar cliente no banco de dados: {e}")
 
-    def delete_customer(self, customer_id):
+    def delete_customer(self, id):
         """Exclui um cliente pelo ID."""
         self.ensure_connection()
         cur = self.conn.cursor()
         try:
             cur.execute(
                 "DELETE FROM customers WHERE id = %s",
-                (customer_id,)
+                (id,)
             )
             self.conn.commit()
             return cur.rowcount  # Retorna o número de linhas afetadas

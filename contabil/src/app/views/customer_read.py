@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.customer_database import Database
-from src.app.models.customer_model import Customer  # Importando o modelo Customer
+from src.app.models.customer_model import Customer
 
 
 class CustomerReader:
@@ -17,7 +17,6 @@ class CustomerReader:
     def get_customer_data(self):
         try:
             all_customers = self.db.get_all_customers()
-            # Convertendo os dados de dicionário para instâncias da classe Customer
             customers = [Customer(
                 customer['cod_customer'],
                 customer['name_customer'],
@@ -26,7 +25,6 @@ class CustomerReader:
                 customer['phone_customer']
             ) for customer in all_customers]
 
-            # Criando um DataFrame para exibição
             df_customers = pd.DataFrame([{
                 'Código': cust.cod_customer,
                 'Nome': cust.name_customer,
@@ -38,7 +36,7 @@ class CustomerReader:
             return df_customers
         except Exception as e:
             st.error(f"Erro ao buscar clientes: {e}")
-            return pd.DataFrame()  # Retorna um DataFrame vazio em caso de erro
+            return pd.DataFrame()
 
     def show_customer_table(self, df_customers):
         s1 = dict(selector='th', props=[('text-align', 'center')])
@@ -71,7 +69,7 @@ def show():
 
     df_customers = reader.get_customer_data()
     if df_customers.empty:
-        return  # Caso não haja dados para exibir, retornamos
+        return
 
     filter_option = st.selectbox(
         "Escolha a forma de filtragem:", ("por Código", "por Nome"))

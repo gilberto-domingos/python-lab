@@ -112,11 +112,9 @@ def show():
                 st.warning("Nenhuma operadora encontrada com esse nome.")
         st.session_state['filtered_operators'] = filtered_operators
 
-    # Exibe a tabela e permite a edição ao clicar diretamente na tabela
     if not filtered_operators.empty:
         editor.show_operator_table(filtered_operators)
 
-        # Seleciona automaticamente a primeira operadora e realiza a edição
         selected_operator_data = filtered_operators.iloc[0]
         selected_operator = editor.db.get_operator_by_cod(
             selected_operator_data['Código'])
@@ -131,12 +129,9 @@ def show():
         updated_values = editor.edit_operator(operator)
 
         if updated_values:
-            # Atualiza a linha da tabela diretamente com os novos dados
             filtered_operators.loc[filtered_operators['Código'] == selected_operator_data['Código'], [
                 'CNPJ', 'Nome']] = updated_values[1], updated_values[2]
-            # Atualiza o estado com os dados modificados
             st.session_state['filtered_operators'] = filtered_operators
-            # Reexibe a tabela com os dados atualizados
             editor.show_operator_table(filtered_operators)
 
 
