@@ -37,19 +37,16 @@ class CustomerEditor:
         new_phone = st.text_input(
             "Novo Telefone", value=customer.get_phone_customer(), max_chars=15)
 
-        # Validação do Código
         cod_valid = True
         if new_cod and not validate_cod(new_cod):
             st.error("O Código deve conter exatamente 5 números.")
             cod_valid = False
 
-        # Validação do Email
         email_valid = True
         if new_email and not validate_email_address(new_email):
             st.error("Email inválido.")
             email_valid = False
 
-        # Validação do Telefone
         phone_valid = True
         phone_validation_result = validate_brazilian_phone(new_phone)
         if new_phone and not phone_validation_result[0]:
@@ -118,11 +115,9 @@ def show():
                 st.warning("Nenhum cliente encontrado com esse nome.")
         st.session_state['filtered_customers'] = filtered_customers
 
-    # Exibe a tabela e a opção de edição
     if not filtered_customers.empty:
         editor.show_customer_table(filtered_customers)
 
-        # Seleciona o primeiro cliente automaticamente
         selected_customer_data = filtered_customers.iloc[0]
         selected_customer = editor.db.get_customer_by_cod(
             selected_customer_data['Código'])
@@ -137,12 +132,9 @@ def show():
         updated_values = editor.edit_customer(customer)
 
         if updated_values:
-            # Atualiza a linha da tabela diretamente com os novos dados
             filtered_customers.loc[filtered_customers['Código'] == selected_customer_data['Código'], [
                 'Nome', 'Célula', 'Email', 'Telefone']] = updated_values[1], updated_values[2], updated_values[3], updated_values[4]
-            # Atualiza o estado com os dados modificados
             st.session_state['filtered_customers'] = filtered_customers
-            # Reexibe a tabela com os dados atualizados
             editor.show_customer_table(filtered_customers)
 
 

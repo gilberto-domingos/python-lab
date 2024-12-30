@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.operator_database import Database
-from src.app.models.operator_model import Operator  # Importando o modelo Operator
+from src.app.models.operator_model import Operator
 
 
 class OperatorReader:
@@ -17,14 +17,12 @@ class OperatorReader:
     def get_operator_data(self):
         try:
             all_operators = self.db.get_all_operators()
-            # Convertendo os dados de dicionário para instâncias da classe Operator
             operators = [Operator(
                 operator['cod_operator'],
                 operator['cnpj_operator'],
                 operator['name_operator']
             ) for operator in all_operators]
 
-            # Criando um DataFrame para exibição
             df_operators = pd.DataFrame([{
                 'Código': operator.cod_operator,
                 'CNPJ': operator.cnpj_operator,
@@ -34,7 +32,7 @@ class OperatorReader:
             return df_operators
         except Exception as e:
             st.error(f"Erro ao buscar operadoras: {e}")
-            return pd.DataFrame()  # Retorna um DataFrame vazio em caso de erro
+            return pd.DataFrame()
 
     def show_operator_table(self, df_operators):
         s1 = dict(selector='th', props=[('text-align', 'center')])
@@ -67,7 +65,7 @@ def show():
 
     df_operators = reader.get_operator_data()
     if df_operators.empty:
-        return  # Caso não haja dados para exibir, retornamos
+        return
 
     filter_option = st.selectbox(
         "Escolha a forma de filtragem:", ("por Código", "por Nome"))

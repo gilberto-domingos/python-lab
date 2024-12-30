@@ -3,6 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.operator_database import Database
+from src.app.models.operator_model import Operator
 
 
 class OperatorDeleter:
@@ -15,28 +16,32 @@ class OperatorDeleter:
         with open(file_path) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    def get_operator_data(self):
-        """Obtém todas as operadoras do banco de dados e formata para exibição."""
+    def get_operator_objects(self):
+        """Obtém todas as operadoras do banco de dados e cria objetos Operator."""
         try:
             all_operators = self.db.get_all_operators()
-            df_operators = pd.DataFrame(all_operators).drop(columns=["id"])
-            df_operators.rename(columns={
-                "cod_operator": "Código",
-                "cnpj_operator": "CNPJ",
-                "name_operator": "Nome"
-            }, inplace=True)
-            return df_operators
+            return [
+                Operator(
+                    cod_operator=op["cod_operator"],
+                    cnpj_operator=op["cnpj_operator"],
+                    name_operator=op["name_operator"],
+                    id=op["id"]
+                ) for op in all_operators
+            ]
         except Exception as e:
             st.error(f"Erro ao buscar operadoras: {e}")
-            return pd.DataFrame()  # Retorna um DataFrame vazio em caso de erro
+            return []
 
-    def show_operator_table(self, df_operators):
-        """Exibe a tabela de operadoras com formatação."""
-        s1 = dict(selector='th', props=[('text-align', 'center')])
-        s2 = dict(selector='td', props=[('text-align', 'center')])
-        styled_df = df_operators.style.set_table_styles([s1, s2]).hide(axis=0)
-        st.markdown('<div style="display: flex; justify-content: center;">' +
-                    styled_df.to_html() + '</div>', unsafe_allow_html=True)
+    def create_operator_dataframe(self, operators):
+        """Converte uma lista de objetos Operator em um DataFrame para exibição."""
+        data = [{
+            "Código": op.get_cod_operator(),
+            "CNPJ": op.get_cnpj_operator(),
+            "Nome": op.get_name_operator(),
+            "ID": op.id
+        } for op in operators]
+
+        return pd.DataFrame(data).drop(columns=["ID"])
 
     def filter_operators(self, df_operators, filter_option, filter_value):
         """Filtra as operadoras por código ou nome conforme a escolha do usuário."""
@@ -54,28 +59,30 @@ class OperatorDeleter:
         except Exception as e:
             st.error(f"Erro ao deletar operadora: {e}")
 
-    def display_delete_confirmation(self, operator_name, operator_id):
+    def display_delete_confirmation(self, operator):
         """Exibe uma confirmação de exclusão antes de deletar a operadora."""
         st.warning(f"Tem certeza que deseja deletar a operadora {
-                   operator_name} (Código: {operator_id})?")
+                   operator.get_name_operator()} (Código: {operator.get_cod_operator()})?")
         if st.button("Deletar"):
-            self.delete_operator(operator_id)
+            self.delete_operator(operator.id)
 
     def display_filtered_operators(self, filtered_operators):
         """Exibe as operadoras filtradas e permite a seleção para exclusão."""
         if filtered_operators.empty:
             st.warning("Nenhuma operadora encontrada com esse critério.")
         else:
-            self.show_operator_table(filtered_operators)
+            st.dataframe(filtered_operators)
 
             # Seleção para deletar
             delete_option = st.selectbox(
-                "Escolha a operadora para deletar", filtered_operators['Código'].tolist())
+                "Escolha a operadora para deletar", filtered_operators['Código'].tolist(
+                )
+            )
             if delete_option:
-                selected_operator = self.db.get_operator_by_cod(delete_option)
-                if selected_operator:
-                    self.display_delete_confirmation(
-                        selected_operator['name_operator'], selected_operator['id'])
+                operator = next((op for op in self.get_operator_objects(
+                ) if op.get_cod_operator() == delete_option), None)
+                if operator:
+                    self.display_delete_confirmation(operator)
 
 
 def show():
@@ -86,27 +93,32 @@ def show():
 
     st.subheader("Operadoras - deletar")
 
-    df_operators = deleter.get_operator_data()
-    if df_operators.empty:
-        return  # Caso não haja dados para exibir, retornamos
+    operators = deleter.get_operator_objects()
+    if not operators:
+        return
+
+    df_operators = deleter.create_operator_dataframe(operators)
 
     filter_option = st.selectbox(
-        "Escolha a forma de filtragem:", ("por Código", "por Nome"))
+        "Escolha a forma de filtragem:", ("por Código", "por Nome")
+    )
 
     if filter_option == "por Código":
         filter_value = st_keyup(
-            "Digite o código da operadora:", key="filter_cod")
+            "Digite o código da operadora:", key="filter_cod"
+        )
     else:
         filter_value = st_keyup(
-            "Digite o nome da operadora:", key="filter_name")
+            "Digite o nome da operadora:", key="filter_name"
+        )
 
     if filter_value:
         filtered_operators = deleter.filter_operators(
-            df_operators, filter_option, filter_value)
+            df_operators, filter_option, filter_value
+        )
         deleter.display_filtered_operators(filtered_operators)
     else:
-        # Exibe a tabela sem filtro se nenhum valor for inserido
-        deleter.show_operator_table(df_operators)
+        st.dataframe(df_operators)
 
 
 if __name__ == "__main__":

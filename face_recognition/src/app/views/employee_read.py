@@ -34,7 +34,7 @@ class EmployeeReader:
             return df_employees
         except Exception as e:
             st.error(f"Erro ao buscar funcionários: {e}")
-            return pd.DataFrame()  # Retorna um DataFrame vazio em caso de erro
+            return pd.DataFrame()
 
     def show_employee_table(self, df_employees):
         s1 = dict(selector='th', props=[('text-align', 'center')])
@@ -67,7 +67,7 @@ def show():
 
     df_employees = reader.get_employee_data()
     if df_employees.empty:
-        return  # Caso não haja dados para exibir, retornamos
+        return
 
     filter_option = st.selectbox(
         "Escolha a forma de filtragem:", ("por Código", "por Nome"))
