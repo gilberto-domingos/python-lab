@@ -45,7 +45,7 @@ class CellDeleter:
             styled_df = df_cells.style.set_table_styles([
                 dict(selector='th', props=[('text-align', 'center')]),
                 dict(selector='td', props=[('text-align', 'center')])
-            ]).hide(axis=0)  # Oculta índice
+            ]).hide(axis=0)
             st.markdown('<div style="display: flex; justify-content: center;">' +
                         styled_df.to_html() + '</div>', unsafe_allow_html=True)
         else:

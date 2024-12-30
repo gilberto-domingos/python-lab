@@ -39,18 +39,23 @@ class CellEditor:
             cod_valid = False
 
         email_valid = True
-        if new_email and not validate_email_address(new_email):
-            st.error("Email inválido.")
-            email_valid = False
+        if new_email:
+            validation_result = validate_email_address(new_email)
+            if validation_result != new_email:
+                st.error(f"Email inválido: {validation_result}")
+                email_valid = False
 
-        if st.button("Salvar Alterações") and cod_valid and email_valid:
-            try:
-                self.db.update_cell(
-                    cell.id, new_cod, new_name, new_email)
-                st.success("Célula atualizada com sucesso!")
-                return new_cod, new_name, new_email
-            except Exception as e:
-                st.error(f"Erro ao atualizar célula: {e}")
+        if st.button("Salvar Alterações"):
+            if not cod_valid or not email_valid:
+                st.error("Corrija os erros antes de salvar.")
+            else:
+                try:
+                    self.db.update_cell(
+                        cell.id, new_cod, new_name, new_email)
+                    st.success("Célula atualizada com sucesso!")
+                    return new_cod, new_name, new_email
+                except Exception as e:
+                    st.error(f"Erro ao atualizar célula: {e}")
         return None
 
 
