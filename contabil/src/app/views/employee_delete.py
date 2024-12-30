@@ -8,16 +8,13 @@ from src.app.models.employee_model import Employee
 
 class EmployeeDeleter:
     def __init__(self, db):
-        """Inicializa o deletador de empregados com a injeção de dependência do banco de dados."""
         self.db = db
 
     def load_css(self, file_path):
-        """Carrega o arquivo CSS no Streamlit."""
         with open(file_path) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     def get_employee_data(self):
-        """Obtém todos os empregados do banco de dados e formata para exibição."""
         try:
             all_employees = self.db.get_all_employees()
             employees = [
@@ -44,7 +41,6 @@ class EmployeeDeleter:
             return pd.DataFrame()
 
     def show_employee_table(self, df_employees):
-        """Exibe a tabela de empregados com formatação."""
         styled_df = df_employees.style.set_table_styles([
             dict(selector='th', props=[('text-align', 'center')]),
             dict(selector='td', props=[('text-align', 'center')])
@@ -53,7 +49,6 @@ class EmployeeDeleter:
                     styled_df.to_html() + '</div>', unsafe_allow_html=True)
 
     def filter_employees(self, df_employees, filter_option, filter_value):
-        """Filtra os empregados por código ou nome conforme a escolha do usuário."""
         try:
             if filter_option == "por Código":
                 return df_employees[df_employees['Código'].str.contains(filter_value, na=False)]
@@ -64,7 +59,6 @@ class EmployeeDeleter:
         return pd.DataFrame()
 
     def delete_employee(self, employee_id, cod_employee):
-        """Deleta o empregado selecionado."""
         try:
             if self.db.delete_employee(employee_id):
                 st.success(f"Empregado com Código '{
@@ -75,7 +69,6 @@ class EmployeeDeleter:
             st.error(f"Erro ao deletar empregado: {e}")
 
     def display_delete_confirmation(self, employee_id, cod_employee, name_employee):
-        """Exibe uma confirmação de exclusão antes de deletar o empregado."""
         st.warning(f"Tem certeza que deseja deletar o empregado '{
                    name_employee}' (Código: {cod_employee})?")
         if st.button("Deletar"):
