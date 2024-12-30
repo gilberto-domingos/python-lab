@@ -44,6 +44,26 @@ def validate_brazilian_phone(phone_customer):
         return False, str(e)
 
 
+def validate_phone_employee(phone_employee):
+    try:
+        parsed_number = phonenumbers.parse(phone_employee, "BR")
+
+        if not phonenumbers.is_valid_number(parsed_number):
+            return False, "Número inválido."
+
+        phone_type = carrier.name_for_number(parsed_number, "pt")
+        region = geocoder.description_for_number(parsed_number, "pt")
+
+        return True, {
+            "formato_e164": phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164),
+            "formato_nacional": phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.NATIONAL),
+            "operadora": phone_type,
+            "região": region
+        }
+    except NumberParseException as e:
+        return False, str(e)
+
+
 if __name__ == '__main__':
     #    cnpj_valido = "12.345.678/0001-95"  # Um CNPJ válido 12.345.678/0001-95
     #    cnpj_invalido = "12.345.678/0001-00"  # Um CNPJ inválido
