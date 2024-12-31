@@ -130,7 +130,7 @@ elif selected == "Cadastro":
             "Célula",
             "Funcionário",
             "Tipo de empresa",
-            "Regime tributario",
+            "Regime tributário",
         ],
         icons=[
             "building",
@@ -165,7 +165,7 @@ elif selected == "Cadastro":
         from src.app.views import type_company
         type_company.show()
 
-    elif cadastro_menu == "Regime tributario":
+    elif cadastro_menu == "Regime tributário":
         from src.app.views import tax_regime
         tax_regime.show()
 

@@ -11,7 +11,7 @@ def show():
     css_path = Path("src/app/css/type_company.css")
     load_css(css_path)
 
-    st.subheader('Escolha a opção para tipos de empresa')
+    st.subheader('Escolha a opção para empresa :')
 
     options = [
         ("Adicionar", "type_company_create"),
