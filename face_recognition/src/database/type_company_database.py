@@ -30,130 +30,59 @@ class Database:
             raise Exception(
                 "Falha ao estabelecer conexão com o banco de dados.")
 
-    def insert_employee(self, cod_employee, name_employee, email_employee, phone_employee):
-        """Insere um novo funcionário no banco de dados."""
+    def get_all_type_companies(self):
+        self.ensure_connection()
+        cur = self.conn.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute("SELECT * FROM type_companies")
+            return cur.fetchall()
+        except psycopg2.Error as e:
+            raise Exception(
+                f"Erro ao buscar tipos de empresa no banco de dados: {e}")
+
+    def get_type_company_by_cod(self, cod_company):
+        self.ensure_connection()
+        cur = self.conn.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute(
+                "SELECT * FROM type_companies WHERE cod_company = %s",
+                (cod_company,)
+            )
+            return cur.fetchone()
+        except psycopg2.Error as e:
+            raise Exception(
+                f"Erro ao buscar tipo de empresa pelo código: {e}")
+
+    def get_type_company_by_descr(self, descr_company):
+        self.ensure_connection()
+        cur = self.conn.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute(
+                "SELECT * FROM type_companies WHERE descr_company ILIKE %s",
+                (f"%{descr_company}%",)
+            )
+            return cur.fetchall()
+        except psycopg2.Error as e:
+            raise Exception(
+                f"Erro ao buscar tipos de empresa pela descrição: {e}")
+
+    def update_type_company(self, id, new_cod, new_descr):
+        """Atualiza um tipo de empresa no banco de dados."""
         self.ensure_connection()
         cur = self.conn.cursor()
         try:
             cur.execute(
                 """
-                INSERT INTO employees (cod_employee, name_employee, email_employee, phone_employee)
-                VALUES (%s, %s, %s, %s)
-                RETURNING id;
+                UPDATE type_companies
+                SET cod_company = %s, descr_company = %s
+                WHERE id = %s
                 """,
-                (cod_employee, name_employee, email_employee, phone_employee)
+                (new_cod, new_descr, id)
             )
             self.conn.commit()
-            return cur.fetchone()[0]  # Retorna o ID do funcionário inserido
-        except psycopg2.Error as e:
-            self.conn.rollback()
-            raise Exception(f"Erro ao salvar no banco de dados: {e}")
-
-    # Método para inserir tipo de empresa
-    def insert_type_company(self, cod_company, descr_company):
-        """Insere um novo tipo de empresa no banco de dados."""
-        self.ensure_connection()
-        cur = self.conn.cursor()
-        try:
-            cur.execute(
-                """
-                INSERT INTO type_companies (cod_company, descr_company)
-                VALUES (%s, %s)
-                RETURNING id;
-                """,
-                (cod_company, descr_company)
-            )
-            self.conn.commit()
-            # Retorna o ID do tipo de empresa inserido
-            return cur.fetchone()[0]
-        except psycopg2.Error as e:
-            self.conn.rollback()
-            raise Exception(f"Erro ao salvar no banco de dados: {e}")
-
-    def get_employee(self, id):
-        """Obtém um funcionário pelo ID."""
-        self.ensure_connection()
-        cur = self.conn.cursor(cursor_factory=RealDictCursor)
-        try:
-            cur.execute(
-                "SELECT * FROM employees WHERE id = %s",
-                (id,)
-            )
-            return cur.fetchone()  # Retorna os dados do funcionário ou None
-        except psycopg2.Error as e:
-            raise Exception(
-                f"Erro ao buscar funcionário no banco de dados: {e}")
-
-    def update_employee(self, id, cod_employee, name_employee, email_employee, phone_employee):
-        """Atualiza os dados de um funcionário."""
-        self.ensure_connection()
-        cur = self.conn.cursor()
-        try:
-            cur.execute(
-                """
-                UPDATE employees
-                SET cod_employee = %s, name_employee = %s, email_employee = %s, phone_employee = %s
-                WHERE id = %s;
-                """,
-                (cod_employee, name_employee,
-                 email_employee, phone_employee, id)
-            )
-            self.conn.commit()
-            return cur.rowcount  # Retorna o número de linhas afetadas
         except psycopg2.Error as e:
             self.conn.rollback()
             raise Exception(
-                f"Erro ao atualizar funcionário no banco de dados: {e}")
-
-    def delete_employee(self, id):
-        """Exclui um funcionário pelo ID."""
-        self.ensure_connection()
-        cur = self.conn.cursor()
-        try:
-            cur.execute(
-                "DELETE FROM employees WHERE id = %s",
-                (id,)
-            )
-            self.conn.commit()
-            return cur.rowcount  # Retorna o número de linhas afetadas
-        except psycopg2.Error as e:
-            self.conn.rollback()
-            raise Exception(
-                f"Erro ao excluir funcionário no banco de dados: {e}")
-
-    def get_all_employees(self):
-        """Obtém todos os funcionários do banco de dados."""
-        self.ensure_connection()
-        cur = self.conn.cursor(cursor_factory=RealDictCursor)
-        try:
-            cur.execute("SELECT * FROM employees")
-            return cur.fetchall()  # Retorna todos os funcionários
-        except psycopg2.Error as e:
-            raise Exception(
-                f"Erro ao buscar todos os funcionários no banco de dados: {e}")
-
-    def get_employee_by_cod(self, cod_employee):
-        """Obtém um funcionário pelo código."""
-        self.ensure_connection()
-        cur = self.conn.cursor(cursor_factory=RealDictCursor)
-        try:
-            cur.execute(
-                "SELECT * FROM employees WHERE cod_employee = %s",
-                (cod_employee,)
-            )
-            return cur.fetchone()  # Retorna os dados do funcionário ou None
-        except psycopg2.Error as e:
-            raise Exception(f"Erro ao buscar funcionário pelo código: {e}")
-
-    def get_employee_by_name(self, name_employee):
-        """Obtém funcionários pelo nome (parcial)."""
-        self.ensure_connection()
-        cur = self.conn.cursor(cursor_factory=RealDictCursor)
-        try:
-            cur.execute(
-                "SELECT * FROM employees WHERE name_employee ILIKE %s",
-                (f"%{name_employee}%",)
-            )
-            return cur.fetchall()  # Retorna todos os funcionários encontrados
-        except psycopg2.Error as e:
-            raise Exception(f"Erro ao buscar funcionários pelo nome: {e}")
+                f"Erro ao atualizar tipo de empresa no banco de dados: {e}")
+        finally:
+            cur.close()

@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 from st_keyup import st_keyup
 from src.database.employee_database import Database
-from src.app.models.employee_model import Employee  # Importando o modelo Employee
+from src.app.models.employee_model import Employee
 
 
 class EmployeeReader:
