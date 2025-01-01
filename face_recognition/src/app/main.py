@@ -87,8 +87,9 @@ with st.sidebar:
             "Solicitações",
             "Método APLA",
             "Dashboards",
+            "Upload",
             "Imagens",
-            "CSV"
+
         ],
         icons=[
             "house",
@@ -98,7 +99,7 @@ with st.sidebar:
             "file-earmark-text",
             "list-check",
             "clipboard-check",
-            "book",
+            "clipboard-check",
             # "bar-chart",
             # "file-earmark-text",
             # ""people",
@@ -107,6 +108,7 @@ with st.sidebar:
             # "clipboard-check",
             # "building",
             # "sliders",
+            # "book"
         ],
         menu_icon="cast",
         default_index=1,
@@ -189,7 +191,7 @@ elif selected == "Imagens":
     from src.app.views import img
     img.show()
 
-elif selected == "CSV":
+elif selected == "Upload":
     from src.app.views import csv
     csv.show()
 
