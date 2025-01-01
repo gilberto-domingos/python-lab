@@ -2,18 +2,43 @@ import streamlit as st
 import pandas as pd
 import os
 
+SAVE_PATH = "src/balance"
+os.makedirs(SAVE_PATH, exist_ok=True)
+
 
 def show():
-    st.title("Conteúdo CSV")
+    st.title("Uploads de balanços")
 
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    csv_file_path = os.path.join(current_dir, "../data/supermarket_sales.csv")
+    st.subheader("Arquivos salvos na pasta:")
+    files = os.listdir(SAVE_PATH)
+    if files:
+        for file in files:
+            st.write(f"- {file}")
+    else:
+        st.write("Nenhum arquivo salvo na pasta.")
 
-    try:
-        df = pd.read_csv(csv_file_path)
-        st.write("arquivo 'vendas.csv' :")
-        st.dataframe(df)  # Exibe o DataFrame como uma tabela
-    except FileNotFoundError:
-        st.error("O arquivo CSV não foi encontrado.")
-    except Exception as e:
-        st.error(f"Ocorreu um erro ao ler o arquivo: {e}")
+    uploaded_file = st.file_uploader(
+        "Escolha um arquivo Excel (.xlsx)",
+        type=["xlsx"]
+    )
+
+    if uploaded_file is not None:
+        try:
+            file_path = os.path.join(SAVE_PATH, uploaded_file.name)
+            with open(file_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
+
+            st.success("O arquivo foi salvo!")
+
+            dataframe = pd.read_excel(uploaded_file)
+            st.write("Visualização dos dados carregados:")
+            st.dataframe(dataframe)
+
+            st.write("Dimensões do DataFrame:")
+            st.write(f"Linhas: {dataframe.shape[0]}, Colunas: {
+                     dataframe.shape[1]}")
+
+        except Exception as e:
+            st.error(f"Erro ao processar o arquivo: {e}")
+    else:
+        st.info("Por favor, envie um arquivo Excel (.xlsx).")
