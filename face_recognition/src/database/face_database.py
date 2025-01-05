@@ -10,10 +10,10 @@ class Database:
         if self.conn is None or self.conn.closed:
             try:
                 self.conn = psycopg2.connect(
-                    dbname="contabil",
-                    user="mmss",
-                    password="mmssmmnn",
-                    host="186.250.185.87",
+                    dbname=" ",
+                    user=" ",
+                    password=" ",
+                    host=" ",
                     port=5432
                 )
                 print("Conexão com o banco de dados estabelecida.")
