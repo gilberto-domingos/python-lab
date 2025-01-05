@@ -1,1 +1,0 @@
-# Project python Contabil tests 
