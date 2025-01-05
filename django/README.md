@@ -1,3 +1,3 @@
-# Django-b1010code
+# Django
 
 - django site
