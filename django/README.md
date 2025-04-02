@@ -1,3 +1,3 @@
 # Django
 
-- experimentand desenvolver um site com django.
+- experimentando desenvolver um site com django.
