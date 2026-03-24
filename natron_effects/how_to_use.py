@@ -19,14 +19,9 @@
 #
 # You could use just a simple expression to animate text, but not for complete typewriter-style animation logic like the script does. ShortsIntro
 
-
-# # print_node_external.py
-# node = app.getNode("Text1")
+# # Verificar objestos para usar do modulo Natron
+# from NatronGui import *
 #
-# if node is None:
-#     print("Erro: node 'Text1' não encontrado no projeto.")
-# else:
-#     for p in node.getParams():
-#         if "text" in p.getScriptName().lower():
-#             print(p.get())
+# obj = app1.getNode("Text1")
+# print(sorted(dir(obj)))
 
