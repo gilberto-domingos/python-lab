@@ -1,5 +1,5 @@
 #Declaração de classe
-from POO.functionMessages import title
+from poo.functionMessages import title
 
 
 class Employee:

@@ -145,6 +145,6 @@ df['Comissão'] = df['Venda'].apply(calculate_commission)
 df['Venda'] = df['Venda'].apply(lambda x: f'R$ {format(float(x.replace("R$ ", "").replace(",", ".")), ".2f").replace(".", ",")}')
 
 # Saving to an Excel file in the current directory
-file_path = '../Bot_auto/bot_files/com_vendas.xlsx'
+file_path = '../bot_auto/bot_files/com_vendas.xlsx'
 df.to_excel(file_path, index=False)
 print(f'File saved as {file_path}')
