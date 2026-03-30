@@ -1,4 +1,22 @@
+################ Render and export ###############
+###### path expample % sequence
+ /home/gil/_Animes/frame_%04d.png
+
+###### Writer conected last merge or node
+
+Node ┐
+     ├─> Merge1 (Over)
+Node ┘---┐
+         ├─> Merge2 (Over) ──> Write
+Node ────┘
+
+###### convert .png to mp4
+#   ffmpeg -framerate 30 -i frame_%04d.exr -vf "scale=in_range=full:out_range=full" -pix_fmt rgb48le frame_%04d.png
+
+
+
 # # Command example
+# #color_param.set(1.0, 1.0, 1.0, 0.0, start_frame)
 # /home/gil/Natron-2.5.0/bin/NatronRenderer /home/gil/_Animes/ShortsIntro.ntp -l /home/gil/python3/natron_effects/print_node_external.py
 
 # Simple rule (remember this)

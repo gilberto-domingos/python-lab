@@ -1,6 +1,6 @@
 from NatronGui import *
 
-output_file = "/home/gil/_Animes/natron_info_obj_meth_attr.txt"
+output_file = "/home/gil/_Animes/natron_info_obj_meth_attr_chat_gpt.txt"
 
 def introspect(obj, name, file, level=0, visited=None):
 
