@@ -1,14 +1,16 @@
+# for export :   finaliz_%04d.png
+
 ################ Render and export ###############
 ###### path expample % sequence
- /home/gil/_Animes/frame_%04d.png
+ # /home/gil/_Animes/frame_%04d.png
 
 ###### Writer conected last merge or node
 
-Node ┐
-     ├─> Merge1 (Over)
-Node ┘---┐
-         ├─> Merge2 (Over) ──> Write
-Node ────┘
+# Node ┐
+#      ├─> Merge1 (Over)
+# Node ┘---┐
+#          ├─> Merge2 (Over) ──> Write
+# Node ────┘
 
 ###### convert .png to mp4
 #   ffmpeg -framerate 30 -i frame_%04d.exr -vf "scale=in_range=full:out_range=full" -pix_fmt rgb48le frame_%04d.png

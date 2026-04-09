@@ -18,6 +18,7 @@ def sistema_principal():
 
     altera_local()
     print("Depois da função local:", mensagem)
+    print("What is the sound of communication?")
 
     altera_na_funcao_externa()
     print("Depois da função não-local:", mensagem)
