@@ -1,8 +1,8 @@
-from drafts.dog import Dog
-from drafts.snake import Snake
+from oop.dog import Dog
+from oop.snake import Snake
 
 
-class Main(Dog):
+class Main:
     @staticmethod
     def run() -> None:
         dog = Dog(name="Rex")
