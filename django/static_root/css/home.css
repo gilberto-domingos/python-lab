@@ -1,0 +1,123 @@
+.card.bg-secondary.mb-3 {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.container {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    border-color: #25D366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1DA851;
+    border-color: #fff;
+    color: white;
+}
+
+.btn-stripe {
+    box-shadow: 1px 1px 1px #000000;
+    color: #fff;
+    background-color: #000000;
+    text-shadow: 1px 1px 1px #000000;
+    margin: 5px;
+    padding: 5px;
+}
+
+.btn-stripe:hover {
+    background-color: #2182cd;
+    border-color: #fff;
+    color: white;
+}
+
+#card-text {
+    color: #fff;
+    text-shadow: 1px 1px 1px #1b1b1b;
+    padding: 10px;
+    text-align: justify
+}
+
+.btn-stripe {
+    max-width: 100% !important;
+    margin: 5px !important;
+    padding: -30px;
+    color: white;
+    border: none;
+}
+
+
+@keyframes colorChange {
+    0%, 100% {
+        background: linear-gradient(45deg, #ffeb3b, #FF5722FF, #2182cd, #9f03aa,#ff5722);
+        background-size: 100% 200%;
+    }
+    0%, 100% {
+        background: linear-gradient(45deg, #2182cd, #ffeb3b, #9f03aa, #ff5722, #b15cd5);
+        background-size: 120% 200%;
+    }
+    0%, 100% {
+        background: linear-gradient(45deg, #2182cd, #9f03aa, #ffeb3b, #ff5722, #b15cd5);
+        background-size: 100% 200%;
+    }
+
+    14.28%, 85.72% {
+        background: linear-gradient(45deg, #2182cd, #9f03aa,#ff5722, #ffeb3b, #b15cd5);
+        background-size: 120% 200%;
+    }
+
+    28.56%, 71.44% {
+        background: linear-gradient(45deg, #2182cd, #9f03aa, #ffeb3b, #ff5722, #b15cd5);
+        background-size: 100% 200%;
+    }
+
+    42.84%, 57.16% {
+        background: linear-gradient(45deg, #2182cd, #ffeb3b, #9f03aa, #ff5722, #b15cd5);
+        background-size: 120% 200%;
+    }
+
+    57.12%, 42.88% {
+        background: linear-gradient(45deg, #ffeb3b, #2182cd, #9f03aa,   #FF5722FF,#ff5722);
+        background-size: 100% 200%;
+    }
+}
+
+.toast-header {
+    color: #ffffff;
+    text-shadow: 1px 1px 1px #000000;
+    animation: colorChange 60s infinite;
+}
+
+.responsive-table {
+    display: table;
+    width: 100%;
+}
+
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+    width: 50%;
+}
+
+.table-cell img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .responsive-table {
+        display: block;
+    }
+
+    .table-cell {
+        display: block;
+        width: 100%;
+    }
+}

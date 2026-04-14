@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}b1010code{% endblock title %}
+
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<div class="container">
+    {% block content %}
+        <div class="card bg-secondary mb-3">
+            <img src="{% static 'image/banner-home.png' %}" alt="banner" id="banner">
+            <div class="card-body">
+                <p class="card-text">
+                    Transferência de sistemas para computação em nuvem eliminando problemas de quedas e acessos, Serviços automatizados, Backups, segurança de informações, estrutura de dados, projetos personalizados sob demanda. Escalonamento de computação em nuvem larga scala para Big Techs.
+                </p>
+                </p>
+                <a href="https://wa.me/554797459085" target="_blank" class="btn btn-whatsapp">
+                    Contate-nos pelo WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="card container mt-4">
+            <div class="responsive-table">
+                <div class="table-cell bg-light border">
+                    <img src="{% static 'image/plan.png' %}" alt="plan" id="plan">
+                </div>
+                <div class="table-cell bg-light border">
+                    <div>
+                        <div class="toast-header border">&nbsp;&nbsp; <b>Integrado :</b>
+                            <a href="https://stripe.com/en-br" target="_blank" class="btn btn-stripe">Powered by STRIPE</a>
+                        </div><br>
+                        <h6><b>Aceite e otimize pagamentos globalmente</b></h6>
+                        Aumente as taxas de autorização, otimize a conversão no checkout e ofereça formas de pagamento locais em todos os mercados.
+                    </div><br>
+                    <div>
+                        <h6><b>Obtenha receitas recorrentes</b></h6>
+                        Atenda modelos de negócios recorrentes, minimize a perda de clientes e automatize as operações financeiras.
+                    </div><br>
+                    <div>
+                        <h6><b>Um pacote totalmente integrado de produtos para gestão financeira e pagamentos</b></h6>
+                        Reduza custos, aumente a receita e administre sua empresa com mais eficiência em uma plataforma totalmente integrada. Use a Stripe para gerenciar todas as suas necessidades de pagamento e operações de receita.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-secondary mb-3" style="max-width: 20rem;">
+            <img src="{% static 'image/backups.png' %}" alt="backups" id="backups">
+        </div>
+        <div class="card bg-secondary mb-3" style="width: 100%; max-width: 20rem;">
+            <img src="{% static 'image/clients.png' %}" alt="backups" id="backups">
+        </div>
+    {% endblock %}
+</div>
+</div>
