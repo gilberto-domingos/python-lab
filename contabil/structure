@@ -1,0 +1,53 @@
+APPLICATION/
+    ├── Dockerfile
+    ├── docker-compose.yml
+    ├── init.sql
+    ├── .git/ 
+    ├── .github/                       
+    ├── .streamlit/                  
+    │   └── config.toml             
+    ├── ansible/
+    │   ├── inventories/
+    │   ├── roles/
+    │   ├── playbooks/
+    │   └── ansible.cfg
+    │
+    ├── scripts/
+    │   
+    ├── src/                   
+    │   ├── app/
+    │   │   ├── controllers/
+    │   │   ├── models/
+    │   │   ├── views/
+    |   |   |     ├── __init__.py
+    │   │   |     └── crud.py
+    │   │   ├── utils/
+    │   │   ├── css/                  
+    │   │   |     └── style.css
+    │   │   ├── __init__.py
+    │   │   └── main.py
+    │   │
+    │   ├── config/
+    │   │   ├── dev.env
+    │   │   ├── prod.env
+    │   │   └── settings.py
+    │   │      
+    │   ├── database
+    |   |     ├── __init__.py
+    │   │     └── database.py
+    │   │
+    │   │   
+    │   └── scripts
+    │       ├── backup_db.sh
+    │       ├── migrate_db.py
+    │       └── seed_db.py
+    │
+    ├── tests/
+    ├── requirements.txt
+    ├── .env
+    ├── .venv
+    ├── .vscode
+    ├── .gitignore
+    ├── .gitattributes
+    ├── README.md
+    └── LICENSE
