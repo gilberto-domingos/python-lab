@@ -8,6 +8,7 @@ Latu Sensu Specialization
 
 Laboratory for experiments, study, and practice of python
 
+=> &nbsp;&nbsp; \* HackerRank_exercises <br>
 => &nbsp;&nbsp; \* bot_auto <br>
 => &nbsp;&nbsp; \* bot_billing <br>
 => &nbsp;&nbsp; \* contabi <br>
